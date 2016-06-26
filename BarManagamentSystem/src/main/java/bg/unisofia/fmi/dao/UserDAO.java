@@ -1,25 +1,28 @@
 package bg.unisofia.fmi.dao;
 
+import javax.ejb.Singleton;
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+
 import bg.unisofia.fmi.models.User;
 
+@Singleton
 public class UserDAO {
 
-	
-	public static void main(String[] args) {
-		UserDAO userDao = new UserDAO(em);
-		
-	}
-	
-    private EntityManager em;
+	@PersistenceContext(unitName="barDatabase")
+	private EntityManager em;
 
-    public UserDAO(EntityManager em) {
-        this.em = em;
-    }
-    
-    public void addUser(User user) {
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
-    }
+	public UserDAO() {
+	}
+
+	public UserDAO(EntityManager em) {
+		this.em = em;
+	}
+
+	public void addUser(User user) {
+		em.persist(user);
+	}
 }
