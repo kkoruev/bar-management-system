@@ -15,7 +15,8 @@ public class Item implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@Column(name="item_id")
+	private int itemId;
 
 	private String description;
 
@@ -25,17 +26,18 @@ public class Item implements Serializable {
 
 	//bi-directional many-to-one association to Category
 	@ManyToOne
+	@JoinColumn(name="category_id")
 	private Category category;
 
 	public Item() {
 	}
 
-	public int getId() {
-		return this.id;
+	public int getItemId() {
+		return this.itemId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 
 	public String getDescription() {

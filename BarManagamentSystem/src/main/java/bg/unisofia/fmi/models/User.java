@@ -2,8 +2,6 @@ package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -18,43 +16,37 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-
-	private String creadentials;
+	@Column(name="user_id")
+	private int userId;
 
 	private String name;
 
-	private String salt;
+	@Column(name="password_hash")
+	private String passwordHash;
+
+	@Column(name="password_salt")
+	private String passwordSalt;
 
 	private String username;
 
 	//bi-directional many-to-one association to Order
-	
-	@OneToMany(mappedBy="user", cascade={CascadeType.PERSIST})
+	@OneToMany(mappedBy="user")
 	private List<Order> orders;
 
 	//bi-directional many-to-one association to Role
-	@ManyToOne(cascade={CascadeType.PERSIST})
+	@ManyToOne
+	@JoinColumn(name="role_id")
 	private Role role;
 
 	public User() {
-		orders = new LinkedList<>();
 	}
 
-	public int getId() {
-		return this.id;
+	public int getUserId() {
+		return this.userId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getCreadentials() {
-		return this.creadentials;
-	}
-
-	public void setCreadentials(String creadentials) {
-		this.creadentials = creadentials;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getName() {
@@ -65,12 +57,20 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-	public String getSalt() {
-		return this.salt;
+	public String getPasswordHash() {
+		return this.passwordHash;
 	}
 
-	public void setSalt(String salt) {
-		this.salt = salt;
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+
+	public String getPasswordSalt() {
+		return this.passwordSalt;
+	}
+
+	public void setPasswordSalt(String passwordSalt) {
+		this.passwordSalt = passwordSalt;
 	}
 
 	public String getUsername() {

@@ -1,8 +1,13 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -15,25 +20,26 @@ public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="role_id")
+	private int roleId;
 
 	@Column(name="role_type")
 	private String roleType;
 
-//	//bi-directional many-to-one association to User
+	//bi-directional many-to-one association to User
 //	@OneToMany(mappedBy="role")
 //	private List<User> users;
 
 	public Role() {
 	}
 
-	public int getId() {
-		return this.id;
+	public int getRoleId() {
+		return this.roleId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public String getRoleType() {

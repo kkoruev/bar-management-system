@@ -14,6 +14,11 @@ import java.util.Date;
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="order_id")
+	private int orderId;
+
 	private String comment;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -23,22 +28,33 @@ public class Order implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="created_at")
 	private Date createdAt;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
 
-	private String status;
+	@Column(name="order_name")
+	private String orderName;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="updated_at")
 	private Date updatedAt;
 
+	//bi-directional many-to-one association to Status
+	@ManyToOne
+	@JoinColumn(name="status_id")
+	private Status status;
+
 	//bi-directional many-to-one association to User
 	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User user;
 
 	public Order() {
+	}
+
+	public int getOrderId() {
+		return this.orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
 	}
 
 	public String getComment() {
@@ -65,20 +81,12 @@ public class Order implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public int getId() {
-		return this.id;
+	public String getOrderName() {
+		return this.orderName;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	public void setOrderName(String orderName) {
+		this.orderName = orderName;
 	}
 
 	public Date getUpdatedAt() {
@@ -87,6 +95,14 @@ public class Order implements Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Status getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public User getUser() {
