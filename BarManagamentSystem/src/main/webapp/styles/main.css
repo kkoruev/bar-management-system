@@ -1,0 +1,45 @@
+/*  .page-content {
+	height: 100%;
+	width: 100%;
+	background-image: url("../img/bar-wallpaper.jpg");
+} */
+ 
+/* css for login page*/
+.form-container {
+	width: 27%;
+	margin: 150px auto;
+	padding: 40px;
+	border: 2px ridge rgba(238, 238, 238, 0.13);
+	border-radius: 5px;
+	-moz-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+	-webkit-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+	box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+	border-bottom: none;
+	background-color: rgba(19, 6, 6, 0.5);
+}
+
+.form-title {
+	text-align: center;
+	color: #fff;
+	
+}
+
+.form-content {
+	margin-top: 30px;
+}
+
+/* css for order-list page */
+.add-order-btn {
+	margin-left: 30px;
+	margin-bottom: 20px;
+}
+
+/* css for order-items page */
+.nav-categories {
+	float: left;
+}
+
+.order-content {
+	float: right;
+}
+
