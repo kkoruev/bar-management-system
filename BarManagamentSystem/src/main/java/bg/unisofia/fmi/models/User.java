@@ -5,10 +5,6 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the user database table.
- * 
- */
 @Entity
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
@@ -33,7 +29,6 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	private List<Order> orders;
 
-	//bi-directional many-to-one association to Role
 	@ManyToOne
 	@JoinColumn(name="role_id")
 	private Role role;

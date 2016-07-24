@@ -3,12 +3,9 @@ package bg.unisofia.fmi.models;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
-/**
- * The persistent class for the order database table.
- * 
- */
 @Entity
 @NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
 public class Order implements Serializable {
@@ -36,6 +33,19 @@ public class Order implements Serializable {
 	@Column(name="updated_at")
 	private Date updatedAt;
 
+	//bi-directional many-to-many association to Item
+	@ManyToMany
+	@JoinTable(
+		name="order_item"
+		, joinColumns={
+			@JoinColumn(name="order_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="item_id")
+			}
+		)
+	private List<Item> items;
+
 	//bi-directional many-to-one association to Status
 	@ManyToOne
 	@JoinColumn(name="status_id")
@@ -45,6 +55,7 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
 
 	public Order() {
 	}
@@ -95,6 +106,14 @@ public class Order implements Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public List<Item> getItems() {
+		return this.items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 
 	public Status getStatus() {

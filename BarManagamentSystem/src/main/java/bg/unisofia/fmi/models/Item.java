@@ -1,13 +1,17 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 
-/**
- * The persistent class for the item database table.
- * 
- */
 @Entity
 @NamedQuery(name="Item.findAll", query="SELECT i FROM Item i")
 public class Item implements Serializable {
@@ -29,6 +33,7 @@ public class Item implements Serializable {
 	@JoinColumn(name="category_id")
 	private Category category;
 
+	
 	public Item() {
 	}
 
