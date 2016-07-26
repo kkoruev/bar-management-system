@@ -28,18 +28,49 @@
 	margin-top: 30px;
 }
 
-/* css for order-list page */
-.add-order-btn {
-	margin-left: 30px;
-	margin-bottom: 20px;
-}
-
 /* css for order-items page */
-.nav-categories {
-	float: left;
+
+
+.sidenav {
+	background-color: #000;
+	color: #fff;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
 }
 
-.order-content {
-	float: right;
+.logo {
+	width: 50%;
 }
+
+img {
+	margin: 0 auto;
+}
+
+.add-order-btn {
+	width: 100%;
+	margin: 30px 0;
+	border: 0px;
+	background-color: #ff9933;
+/* 	float:left; */
+}
+
+.sidebar-nav a {
+	background-color: none;
+	margin-top: 5px;
+	border-radius: 0px !important;
+	background-color: #000;
+	border: none;
+	border-bottom: 1px solid #333;
+}
+
+.search-bar {
+	margin-top: 20px;
+}
+
+
+
+
+
 
