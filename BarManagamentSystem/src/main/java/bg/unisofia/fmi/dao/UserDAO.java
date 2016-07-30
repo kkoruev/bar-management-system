@@ -4,6 +4,10 @@ import bg.unisofia.fmi.models.User;
 
 public interface UserDAO {
 
-	public void addUser(User user);
+	void addUser(User user);
+
+	User findByUsername(String userName);
+
+	boolean authenticateUser(String userName, String password) throws Exception;
 	
 }
