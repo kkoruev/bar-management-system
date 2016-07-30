@@ -1,10 +1,11 @@
 package bg.unisofia.fmi.dao;
 
+import bg.unisofia.fmi.dto.UserDTO;
 import bg.unisofia.fmi.models.User;
 
 public interface UserDAO {
 
-	void addUser(User user);
+	void registerUser(UserDTO userDTO);
 
 	User findByUsername(String userName);
 
