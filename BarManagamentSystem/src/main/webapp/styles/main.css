@@ -32,7 +32,7 @@
 
 
 .sidenav {
-	background-color: #000;
+	background-color: #343434;
 	color: #fff;
 	position: fixed;
 	top: 0;
@@ -48,27 +48,45 @@ img {
 	margin: 0 auto;
 }
 
+
 .add-order-btn {
 	width: 100%;
 	margin: 30px 0;
 	border: 0px;
-	background-color: #ff9933;
+	background-color: #ea5455;
 /* 	float:left; */
+}
+
+.add-items-btn {
+	background-color: #343434;
+	border: 0px;
+	width: 100%;
 }
 
 .sidebar-nav a {
 	background-color: none;
 	margin-top: 5px;
-	border-radius: 0px !important;
-	background-color: #000;
+/* 	border-radius: 0px !important; */
+	background-color: #fde9c9;
 	border: none;
-	border-bottom: 1px solid #333;
+	/* border-bottom: 1px solid #333; */
 }
 
 .search-bar {
 	margin-top: 20px;
 }
 
+.order-table {
+	margin: 30px;
+}
+
+/* #main-content {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	background-image: url("../img/bar1.jpg");
+	background-repeat: no-repeat;
+} */
 
 
 
