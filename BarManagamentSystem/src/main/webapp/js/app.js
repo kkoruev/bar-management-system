@@ -15,12 +15,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         templateUrl: 'templates/order-list.html',
         controller: 'OrderListController'
     })
-     
     .state('order-items', {
         url: '/order-items',
         templateUrl: 'templates/order-items.html',
         controller: 'OrderItemsController'
     })
+     .state('register-user', {
+        url: '/register-user',
+        templateUrl: 'templates/register-user.html',
+        controller: 'RegisterUserController'
+    });
     /*
     .state('configure-products', {
         url: '/configure-products',
@@ -41,5 +45,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         url: '/forbidden',
         templateUrl: 'templates/page-forbidden.html',
     })*/
-    $urlRouterProvider.otherwise('/');
-}])
+    $urlRouterProvider.otherwise('/register-user');
+	}
+]);

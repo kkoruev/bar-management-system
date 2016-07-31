@@ -2,8 +2,6 @@ package bg.unisofia.fmi.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import bg.unisofia.fmi.models.Role;
-
 @XmlRootElement
 public class UserDTO {
 

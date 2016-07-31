@@ -39,6 +39,7 @@ public class UserDAOImpl implements UserDAO {
 		Role userRole = new Role();
 		userRole.setRoleType(userDTO.getUserRole().getRoleType());
 		user.setRole(userRole);
+		em.persist(userRole);
 		em.persist(user);
 	}
 
@@ -48,10 +49,10 @@ public class UserDAOImpl implements UserDAO {
 	 * @see bg.unisofia.fmi.dao.impl.UserDao#findByUsername(java.lang.String)
 	 */
 	@Override
-	public User findByUsername(String userName) {
-		String txtQuery = "SELECT u FROM User u WHERE u.userName=:userName";
+	public User findByUsername(String username) {
+		String txtQuery = "SELECT u FROM User u WHERE u.username = :username";
 		TypedQuery<User> getUserQuery = em.createQuery(txtQuery, User.class);
-		getUserQuery.setParameter("userName", userName);
+		getUserQuery.setParameter("username", username);
 		return findUser(getUserQuery);
 	}
 

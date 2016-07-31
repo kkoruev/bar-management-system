@@ -1,0 +1,34 @@
+<div class="container-fluid">
+	<div class="row">
+		<header class="col-sm-3 col-xs-12 sidenav">
+			<div id="logo-top">
+				<a href="/"> <img class="img-responsive logo" src="img/java.png"
+					alt="JavaEE BAR">
+				</a>
+			</div>
+		</header>
+		<div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
+			<form name="registerForm" class="col-sm-8">
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" class="form-control" id="username" placeholder="Username">
+				</div>
+				<div class="form-group">
+    				<label for="password">Password</label>
+    				<input type="password" class="form-control" id="password" placeholder="Password">
+ 				 </div>
+ 				 <div class="form-group">
+    				<label for="repeatPassword">Repeat password</label>
+    				<input type="password" class="form-control" id="repeatPassword" placeholder="Repeat password">
+ 				 </div>
+				<div class="form-group">
+					<label for="role">Example select</label>
+					 <select ng-model="roles" ng-options="role.roletype for role in roles" class="form-control" id="role">
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		
+		</div>
+	</div>
+</div>

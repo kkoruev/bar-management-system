@@ -14,5 +14,6 @@ public class RoleDTO {
 	public void setRoleType(String roleType) {
 		this.roleType = roleType;
 	}
+
 		
 }
