@@ -25,7 +25,12 @@ public class UserManager {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addUser(UserDTO userDTO) {
-		return null;
+		try {
+			userDao.registerUser(userDTO);
+		} catch (Exception e) {
+			return Response.serverError().build();
+		}
+		return Response.ok().build();
 	}
 
 	@Path("/login")
@@ -43,10 +48,10 @@ public class UserManager {
 		return Response.serverError().build();
 	}
 
-	@Path("/check")
+	@Path("/role")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String getUserName() {
-		return userContext.getUser().getUsername();
+		return userContext.getUser().getRole().getRoleType();
 	}
 }

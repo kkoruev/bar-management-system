@@ -5,7 +5,7 @@ import bg.unisofia.fmi.models.User;
 
 public interface UserDAO {
 
-	void registerUser(UserDTO userDTO);
+	void registerUser(UserDTO userDTO) throws Exception;
 
 	User findByUsername(String userName);
 

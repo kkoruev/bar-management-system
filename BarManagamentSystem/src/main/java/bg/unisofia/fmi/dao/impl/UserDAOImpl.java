@@ -17,13 +17,17 @@ public class UserDAOImpl implements UserDAO {
 	@PersistenceContext(unitName = "barDatabase")
 	EntityManager em;
 
-	/* (non-Javadoc)
-	 * @see bg.unisofia.fmi.dao.impl.UserDao#registerUser(bg.unisofia.fmi.models.User)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * bg.unisofia.fmi.dao.impl.UserDao#registerUser(bg.unisofia.fmi.models.
+	 * User)
 	 */
 	@Override
-	public void registerUser(UserDTO userDTO){
+	public void registerUser(UserDTO userDTO) throws Exception{
 		if (findByUsername(userDTO.getUsername()) != null){
-			// TO DO: 
+			throw new Exception("User with name " + userDTO.getUsername() + " exists");
 		}
 		String salt = EncryptionUtils.generateSalt();
 		String hashedPassword = EncryptionUtils.getHashedPassword(userDTO.getUsername(), salt);
@@ -38,7 +42,9 @@ public class UserDAOImpl implements UserDAO {
 		em.persist(user);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see bg.unisofia.fmi.dao.impl.UserDao#findByUsername(java.lang.String)
 	 */
 	@Override
@@ -48,9 +54,12 @@ public class UserDAOImpl implements UserDAO {
 		getUserQuery.setParameter("userName", userName);
 		return findUser(getUserQuery);
 	}
-	
-	/* (non-Javadoc)
-	 * @see bg.unisofia.fmi.dao.impl.UserDao#authenticateUser(java.lang.String, java.lang.String)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see bg.unisofia.fmi.dao.impl.UserDao#authenticateUser(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	public boolean authenticateUser(String userName, String password) throws Exception {
