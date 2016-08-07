@@ -31,7 +31,7 @@
 /* css for order-items page */
 
 
-.sidenav {
+.sidebar {
 	background-color: #343434;
 	color: #fff;
 	position: fixed;
@@ -63,13 +63,11 @@ img {
 	width: 100%;
 }
 
-.sidebar-nav a {
+.list-orders a {
 	background-color: none;
 	margin-top: 5px;
-/* 	border-radius: 0px !important; */
 	background-color: #fde9c9;
 	border: none;
-	/* border-bottom: 1px solid #333; */
 }
 
 .search-bar {
@@ -88,7 +86,74 @@ img {
 	background-repeat: no-repeat;
 } */
 
+/* css for register user page
+ */
+ 
+ .sidebar-nav {
+ 	margin-top: 30px;
+ }
+ 
+ 
+.sidebar-nav li:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	height: 100%;
+	width: 0;
+	background-color: #ea5455;
+	-webkit-transition: width .2s ease-in;
+	-moz-transition: width .2s ease-in;
+	-ms-transition: width .2s ease-in;
+	transition: width .2s ease-in;
+}
+
+.sidebar-nav li:hover:before {
+    width: 100%;
+    -webkit-transition: width .2s ease-in;
+      -moz-transition:  width .2s ease-in;
+       -ms-transition:  width .2s ease-in;
+            transition: width .2s ease-in;
+
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus,
+.sidebar-nav li.open a:hover,
+.sidebar-nav li.open a:active,
+.sidebar-nav li.open a:focus{
+    color: #fff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.sidebar-nav li a {
+	margin: 10px;
+	color: #fff;
+}
+
+.sidebar-nav li {
+	text-align: center;
+}
+
+.form-register {
+	width: 50%;
+	margin: 40px auto;
+}
+
+#main-content h3{
+    width: 50%;
+	margin: 40px auto; 
+	text-align: center;
+	background-color: #2c3e50;
+	padding: 10px;
+	color: #fff;
+	border-radius: 5px;
+}
 
 
-
-
+.btn-submit {
+	float: right;
+}
