@@ -7,7 +7,6 @@ import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.UserDAO;
 import bg.unisofia.fmi.dto.UserDTO;
-import bg.unisofia.fmi.models.Role;
 import bg.unisofia.fmi.models.User;
 import bg.unisofia.fmi.utils.EncryptionUtils;
 
@@ -36,10 +35,7 @@ public class UserDAOImpl implements UserDAO {
 		user.setName(userDTO.getName());
 		user.setPasswordHash(hashedPassword);
 		user.setPasswordSalt(salt);
-		Role userRole = new Role();
-		userRole.setRoleType(userDTO.getUserRole().getRoleType());
-		user.setRole(userRole);
-		em.persist(userRole);
+		user.setRole("admin");
 		em.persist(user);
 	}
 

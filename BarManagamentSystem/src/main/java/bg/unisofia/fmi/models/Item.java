@@ -1,17 +1,15 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 
+/**
+ * The persistent class for the item database table.
+ * 
+ */
 @Entity
 @NamedQuery(name="Item.findAll", query="SELECT i FROM Item i")
 public class Item implements Serializable {
@@ -26,14 +24,17 @@ public class Item implements Serializable {
 
 	private String name;
 
-	private double price;
+	private BigDecimal price;
 
 	//bi-directional many-to-one association to Category
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	private Category category;
 
-	
+//	//bi-directional many-to-one association to OrderItem
+//	@OneToMany(mappedBy="item")
+//	private List<OrderItem> orderItems;
+
 	public Item() {
 	}
 
@@ -61,11 +62,11 @@ public class Item implements Serializable {
 		this.name = name;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -76,5 +77,27 @@ public class Item implements Serializable {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+//	public List<OrderItem> getOrderItems() {
+//		return this.orderItems;
+//	}
+//
+//	public void setOrderItems(List<OrderItem> orderItems) {
+//		this.orderItems = orderItems;
+//	}
+//
+//	public OrderItem addOrderItem(OrderItem orderItem) {
+//		getOrderItems().add(orderItem);
+//		orderItem.setItem(this);
+//
+//		return orderItem;
+//	}
+//
+//	public OrderItem removeOrderItem(OrderItem orderItem) {
+//		getOrderItems().remove(orderItem);
+//		orderItem.setItem(null);
+//
+//		return orderItem;
+//	}
 
 }

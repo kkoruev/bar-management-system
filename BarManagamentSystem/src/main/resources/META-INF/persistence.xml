@@ -5,11 +5,10 @@
 	<persistence-unit name="barDatabase">
 		<description>Container Persistence Unit</description>
 		<jta-data-source>java:jdbc/barDatabase</jta-data-source>
+		<class>bg.unisofia.fmi.models.Bill</class>
 		<class>bg.unisofia.fmi.models.Category</class>
 		<class>bg.unisofia.fmi.models.Item</class>
 		<class>bg.unisofia.fmi.models.Order</class>
-		<class>bg.unisofia.fmi.models.Role</class>
-		<class>bg.unisofia.fmi.models.Status</class>
 		<class>bg.unisofia.fmi.models.User</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>

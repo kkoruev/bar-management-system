@@ -1,20 +1,21 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import java.util.List;
 
-@XmlRootElement
+
+/**
+ * The persistent class for the category database table.
+ * 
+ */
 @Entity
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="category_id")
 	private int categoryId;
 

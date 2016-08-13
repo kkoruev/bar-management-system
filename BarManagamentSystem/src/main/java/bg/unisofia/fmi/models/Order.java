@@ -1,11 +1,24 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
+/**
+ * The persistent class for the order database table.
+ * 
+ */
 @Entity
 @NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
 public class Order implements Serializable {
@@ -26,36 +39,21 @@ public class Order implements Serializable {
 	@Column(name="created_at")
 	private Date createdAt;
 
-	@Column(name="order_name")
-	private String orderName;
+	private String status;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="updated_at")
-	private Date updatedAt;
-
-	//bi-directional many-to-many association to Item
-	@ManyToMany
-	@JoinTable(
-		name="order_item"
-		, joinColumns={
-			@JoinColumn(name="order_id")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="item_id")
-			}
-		)
-	private List<Item> items;
-
-	//bi-directional many-to-one association to Status
+	//bi-directional many-to-one association to Bill
 	@ManyToOne
-	@JoinColumn(name="status_id")
-	private Status status;
+	@JoinColumn(name="bill_id")
+	private Bill bill;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="taken_by_id")
 	private User user;
-	
+
+//	//bi-directional many-to-one association to OrderItem
+//	@OneToMany(mappedBy="order")
+//	private List<OrderItem> orderItems;
 
 	public Order() {
 	}
@@ -92,36 +90,20 @@ public class Order implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public String getOrderName() {
-		return this.orderName;
-	}
-
-	public void setOrderName(String orderName) {
-		this.orderName = orderName;
-	}
-
-	public Date getUpdatedAt() {
-		return this.updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public List<Item> getItems() {
-		return this.items;
-	}
-
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
-
-	public Status getStatus() {
+	public String getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Bill getBill() {
+		return this.bill;
+	}
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
 	}
 
 	public User getUser() {
@@ -131,5 +113,27 @@ public class Order implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+//	public List<OrderItem> getOrderItems() {
+//		return this.orderItems;
+//	}
+//
+//	public void setOrderItems(List<OrderItem> orderItems) {
+//		this.orderItems = orderItems;
+//	}
+//
+//	public OrderItem addOrderItem(OrderItem orderItem) {
+//		getOrderItems().add(orderItem);
+//		orderItem.setOrder(this);
+//
+//		return orderItem;
+//	}
+//
+//	public OrderItem removeOrderItem(OrderItem orderItem) {
+//		getOrderItems().remove(orderItem);
+//		orderItem.setOrder(null);
+//
+//		return orderItem;
+//	}
 
 }

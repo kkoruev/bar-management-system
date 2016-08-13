@@ -2,7 +2,6 @@ package bg.unisofia.fmi.rest;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
@@ -48,10 +47,10 @@ public class UserManager {
 		return Response.serverError().build();
 	}
 
-	@Path("/role")
-	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	public String getUserName() {
-		return userContext.getUser().getRole().getRoleType();
-	}
+//	@Path("/role")
+//	@GET
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public String getUserName() {
+//		return userContext.getUser().getRole().getRoleType();
+//	}
 }
