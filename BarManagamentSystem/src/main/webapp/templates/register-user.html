@@ -1,14 +1,22 @@
 <div class="container-fluid">
 	<div class="row">
-		<header class="col-sm-3 col-xs-12 sidenav">
+		<header class="col-sm-3 col-xs-12 sidebar">
 			<div id="logo-top">
 				<a href="/"> <img class="img-responsive logo" src="img/java.png"
 					alt="JavaEE BAR">
 				</a>
 			</div>
+			<nav>
+				<ul class="nav sidebar-nav">
+					<li><a href="#">Menu 1</a></li>
+					<li><a href="#">Menu 2</a></li>
+					<li><a href="#">Menu 3</a></li>
+				</ul>
+			</nav>
 		</header>
 		<div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
-			<form name="registerForm" class="col-sm-8">
+			<h3>REGISTER</h3>
+			<form name="registerForm" class="form-register">
 				<div class="form-group">
 					<label for="username">Username</label>
 					<input type="text" class="form-control" id="username" placeholder="Username">
@@ -26,7 +34,7 @@
 					 <select ng-model="roles" ng-options="role.roletype for role in roles" class="form-control" id="role">
 					</select>
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary btn-submit">Submit</button>
 			</form>
 		
 		</div>
