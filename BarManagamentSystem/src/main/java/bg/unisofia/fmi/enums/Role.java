@@ -1,5 +1,8 @@
 package bg.unisofia.fmi.enums;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public enum Role {
 	ADMIN, BARTENDER, WAITER;
 	
@@ -11,4 +14,6 @@ public enum Role {
 		}
 		return false;
 	}
+	
+	
 }

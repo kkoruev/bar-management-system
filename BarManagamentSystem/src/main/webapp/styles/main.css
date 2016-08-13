@@ -28,6 +28,8 @@
 	margin-top: 30px;
 }
 
+/* end of login page css */
+
 /* css for order-items page */
 
 
@@ -157,3 +159,12 @@ img {
 .btn-submit {
 	float: right;
 }
+
+.validation-message {
+	color: #d60707;
+    display: block;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+
+/* end of register page css */
