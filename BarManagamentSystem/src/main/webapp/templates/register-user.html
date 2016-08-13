@@ -16,22 +16,41 @@
 		</header>
 		<div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
 			<h3>REGISTER</h3>
-			<form name="registerForm" class="form-register">
+			<form ng-submit="registerUser(registerInfo)" name="registerForm" class="form-register">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text"
+						   class="form-control"
+						   id="name" 
+						   placeholder="Name"
+						   ng-model="registerInfo.name">
+				</div>
 				<div class="form-group">
 					<label for="username">Username</label>
-					<input type="text" class="form-control" id="username" placeholder="Username">
+					<input type="text"
+						   class="form-control"
+						   id="username"
+						   placeholder="Username"
+						   ng-model="registerInfo.username">
 				</div>
 				<div class="form-group">
     				<label for="password">Password</label>
-    				<input type="password" class="form-control" id="password" placeholder="Password">
+    				<input type="password"
+    						class="form-control"
+    						id="password"
+    					    placeholder="Password"
+    					    ng-model="registerInfo.password">
  				 </div>
  				 <div class="form-group">
     				<label for="repeatPassword">Repeat password</label>
-    				<input type="password" class="form-control" id="repeatPassword" placeholder="Repeat password">
+    				<input type="password" 
+    						class="form-control" 
+    						id="repeatPassword" 
+    						placeholder="Repeat password">
  				 </div>
 				<div class="form-group">
 					<label for="role">Example select</label>
-					 <select ng-model="roles" ng-options="role.roletype for role in roles" class="form-control" id="role">
+					 <select ng-model="registerInfo.roleType" ng-options="role.roletype for role in roles" class="form-control" id="role">
 					</select>
 				</div>
 				<button type="submit" class="btn btn-primary btn-submit">Submit</button>
