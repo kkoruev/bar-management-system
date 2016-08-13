@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `bill`
+--
+
+DROP TABLE IF EXISTS `bill`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bill` (
+  `bill_id` int(11) NOT NULL AUTO_INCREMENT,
+  `table_name` varchar(3) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `completed_at` datetime DEFAULT NULL,
+  `owner_id` int(11) NOT NULL,
+  PRIMARY KEY (`bill_id`),
+  KEY `owner_id_idx` (`owner_id`),
+  CONSTRAINT `owner_id` FOREIGN KEY (`owner_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bill`
+--
+
+LOCK TABLES `bill` WRITE;
+/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `category`
 --
 
@@ -23,11 +51,11 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
-  `category_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`category_id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=big5;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +64,6 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'tea');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,10 +75,10 @@ DROP TABLE IF EXISTS `item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item` (
-  `item_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `price` decimal(6,2) unsigned NOT NULL,
   `name` varchar(45) NOT NULL,
-  `price` double unsigned NOT NULL DEFAULT '0',
-  `description` varchar(45) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`item_id`),
   UNIQUE KEY `name_UNIQUE` (`name`),
@@ -70,30 +97,6 @@ LOCK TABLES `item` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `openjpa_sequence_table`
---
-
-DROP TABLE IF EXISTS `openjpa_sequence_table`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `openjpa_sequence_table` (
-  `ID` tinyint(4) NOT NULL,
-  `SEQUENCE_VALUE` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `openjpa_sequence_table`
---
-
-LOCK TABLES `openjpa_sequence_table` WRITE;
-/*!40000 ALTER TABLE `openjpa_sequence_table` DISABLE KEYS */;
-INSERT INTO `openjpa_sequence_table` VALUES (0,751);
-/*!40000 ALTER TABLE `openjpa_sequence_table` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `order`
 --
 
@@ -101,19 +104,18 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order` (
-  `order_id` int(11) NOT NULL,
+  `order_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `comment` varchar(45) DEFAULT NULL,
-  `status_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `completed_at` datetime NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `order_name` varchar(45) DEFAULT NULL,
+  `completed_at` datetime DEFAULT NULL,
+  `bill_id` int(11) DEFAULT NULL,
+  `taken_by_id` int(11) DEFAULT NULL,
+  `status` varchar(45) NOT NULL,
   PRIMARY KEY (`order_id`),
-  KEY `user_id_idx` (`user_id`),
-  KEY `status_id_idx` (`status_id`),
-  CONSTRAINT `status_id` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `taken_by_id_idx` (`taken_by_id`),
+  KEY `bill_id_idx` (`bill_id`),
+  CONSTRAINT `bill_id` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `taken_by_id` FOREIGN KEY (`taken_by_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -134,10 +136,10 @@ DROP TABLE IF EXISTS `order_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_item` (
-  `order_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `order_item_id` int(11) NOT NULL,
-  PRIMARY KEY (`order_item_id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) unsigned DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `order_id_idx` (`order_id`),
   KEY `item_id_idx` (`item_id`),
   CONSTRAINT `item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -155,54 +157,6 @@ LOCK TABLES `order_item` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `role`
---
-
-DROP TABLE IF EXISTS `role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL,
-  `role_type` varchar(45) NOT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `role`
---
-
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (0,'waiter'),(551,'waiter'),(651,'waiter');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `status`
---
-
-DROP TABLE IF EXISTS `status`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `status` (
-  `status_id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`status_id`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `status`
---
-
-LOCK TABLES `status` WRITE;
-/*!40000 ALTER TABLE `status` DISABLE KEYS */;
-/*!40000 ALTER TABLE `status` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `user`
 --
 
@@ -210,17 +164,15 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `password_hash` char(128) NOT NULL,
-  `role_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
+  `password_hash` char(128) NOT NULL,
   `password_salt` char(24) NOT NULL,
+  `role` varchar(45) NOT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username_UNIQUE` (`username`),
-  KEY `role_idx` (`role_id`),
-  CONSTRAINT `role` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +181,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (601,'James','esOfCM/iE2ZAayO/T/KkPpDaQmG6s8gbNp02RlC2Jp+ABXD6xSuW/9ZvPTp3mY3bg0ohE4I24aAWag1CBm3Ipg==',551,'KRIS','dXv2phDH8wOCqmrIDcxttw=='),(701,'James','3m7TF1ewKBf6MKxbkHVmRKfwKvf1xKQUCgBXc7aqmdEKeSdb5dPK95y00BuVL2S+YN+bS09lXzQ+PwUBsLAusw==',651,'Tom','1L+ew8zuoGpcYEZRlyMN0g==');
+INSERT INTO `user` VALUES (1,'James','Tom','ImJfZEe+GrXt+V71k2KX0PrFxJf1PT4s17tywQBVmiCdctOkuQWW69kXRD7HZe3hptOLELFLcNFjSkFF0qFv6Q==','iQj/q0mO0Tkyv0QyiGmoFQ==','admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -242,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-31 22:51:44
+-- Dump completed on 2016-08-13  9:50:57
