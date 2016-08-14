@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.CategoryDAO;
 import bg.unisofia.fmi.dao.ItemDAO;
@@ -35,8 +36,7 @@ public class ItemDAOImpl implements ItemDAO{
 
 	@Override
 	public List<Item> getItems() {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("Item.findAll", Item.class).getResultList();
 	}
 
 }

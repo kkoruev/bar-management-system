@@ -1,6 +1,8 @@
 package bg.unisofia.fmi.rest;
 
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import bg.unisofia.fmi.dao.ItemDAO;
 import bg.unisofia.fmi.dto.ItemDTO;
+import bg.unisofia.fmi.models.Item;
 
 
 @Stateless
@@ -35,8 +38,8 @@ public class ItemManager {
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getItems() {
-		return null;
+	public List<Item> getItems() {
+		return itemDAO.getItems();
 	}
 	
 	
