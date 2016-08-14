@@ -77,7 +77,9 @@
 							<div class="form-group">
 								<div>
 									<input type="text" class="form-control"
-										placeholder="Order name" />
+										   placeholder="Order name" 
+										   ng-model="billName"	
+									/>
 								</div>
 							</div>
 						</form>
@@ -87,8 +89,7 @@
 
 					<!-- Modal Footer -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary">Save
-							changes</button>
+						<button type="button" class="btn btn-primary" ng-click="startBill(billName)" data-dismiss="modal"> Add </button>
 					</div>
 				</div>
 			</div>

@@ -1,54 +1,49 @@
 <!-- <div class="container">
-	<div class="form-title">
-		<h2>LOGIN</h2>
-	</div>
-	<form class="form-content">
-		<fieldset class="form-group">
-			<input type="text" class="form-control" id="exampleInputUser1"
-				placeholder="Username">
-		</fieldset>
-		<fieldset class="form-group">
-			<input type="password" class="form-control"
-				id="exampleInputPassword1" placeholder="Password">
-		</fieldset>
-		<button type="submit" class="btn btn-primary col-xs-12">Log
-			in</button>
-		 <small class="text-muted">Not a member ?</small>
-	</form>
+    <div class="form-title">
+        <h2>LOGIN</h2>
+    </div>
+    <form class="form-content">
+        <fieldset class="form-group">
+            <input type="text" class="form-control" id="exampleInputUser1"
+                placeholder="Username">
+        </fieldset>
+        <fieldset class="form-group">
+            <input type="password" class="form-control"
+                id="exampleInputPassword1" placeholder="Password">
+        </fieldset>
+        <button type="submit" class="btn btn-primary col-xs-12">Log
+            in</button>
+         <small class="text-muted">Not a member ?</small>
+    </form>
 </div> -->
 
 
 <div ng-controller="LoginPageController" class="page-content">
-	<div class="form-container">
-		<div class="form-title">
-			<h2>User Login</h2>
-		</div>
-		<form class="form-horizontal form-content">
-			<fieldset>
-				<div class="form-group">
-					<div class="w">
-						<input class="form-control" id="inputUsername"
-							placeholder="Username" type="text" ng-model="userName">
-							{{userName}}
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="">
-						<input class="form-control" id="inputPassword"
-							placeholder="Password" type="password" ng-model="userPassword">
-						<div class="checkbox">
-							<label> <input type="checkbox"> Save my password
-							</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="">
-						<button type="submit"
-							class="btn btn-primary col-xs-6 col-md-offset-3">Log In</button>
-					</div>
-				</div>
-			</fieldset>
-		</form>
-	</div>
+    <div class="form-container">
+        <div class="form-title">
+            <h2>User Login</h2>
+        </div>
+        <form class="form-horizontal form-content" ng-submit="login(userCredentials)">
+            <fieldset>
+                <div class="form-group">
+                    <div class="w">
+                        <input class="form-control" id="inputUsername"
+                            placeholder="Username" type="text" ng-model="userCredentials.username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        <input class="form-control" id="inputPassword"
+                            placeholder="Password" type="password" ng-model="userCredentials.password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        <button type="submit"
+                            class="btn btn-primary col-xs-6 col-md-offset-3">Log In</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </div>

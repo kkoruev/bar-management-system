@@ -2,6 +2,7 @@ package bg.unisofia.fmi.dao.impl;
 
 import java.util.Date;
 
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -12,6 +13,7 @@ import bg.unisofia.fmi.models.Bill;
 import bg.unisofia.fmi.models.Order;
 import bg.unisofia.fmi.models.User;
 
+@Singleton
 public class BillDAOImpl implements BillDAO {
 
 	@PersistenceContext(unitName = "barDatabase")

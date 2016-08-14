@@ -1,6 +1,8 @@
 package bg.unisofia.fmi.rest;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import bg.unisofia.fmi.context.impl.UserContext;
+import bg.unisofia.fmi.context.impl.UserContextImpl;
 import bg.unisofia.fmi.dao.BillDAO;
 import bg.unisofia.fmi.dao.UserDAO;
 import bg.unisofia.fmi.dto.BillDTO;
@@ -17,6 +19,7 @@ import bg.unisofia.fmi.dto.UserDTO;
 import bg.unisofia.fmi.enums.Role;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
 
+@Stateless
 @Path("/user")
 public class UserManager {
 
@@ -26,8 +29,8 @@ public class UserManager {
 	@EJB
 	BillDAO billDAO;
 	
-	@EJB
-	UserContext userContext;
+	@Inject
+	UserContextImpl userContext;
 
 	@Path("/register")
 	@POST
@@ -80,14 +83,13 @@ public class UserManager {
 		catch (Exception e) {
 			return Response.serverError().build();
 		}
-		billDAO.startBill(billDTO, userContext.getUser());
 		return Response.ok().build();
 	}
 
-	// @Path("/role")
-	// @GET
-	// @Consumes(MediaType.APPLICATION_JSON)
-	// public String getUserName() {
-	// return userContext.getUser().getRole().getRoleType();
-	// }
+	 @Path("/role")
+	 @GET
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 public String getUserName() {
+		 return userContext.getUser().getRole();
+	 }
 }

@@ -1,7 +1,11 @@
 'use strict';
 
-var app = angular.module('BarManagementSystem', [ 'ui.bootstrap', 'ngRoute',
-		'ngResource', 'ui.router' ]);
+var app = angular.module('BarManagementSystem', [ 
+    'ui.bootstrap', 
+    'ngRoute',
+    'ngResource',
+    'ui.router' 
+]);
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider

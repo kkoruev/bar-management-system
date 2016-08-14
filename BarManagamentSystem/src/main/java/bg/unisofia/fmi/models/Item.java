@@ -1,9 +1,16 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -31,9 +38,6 @@ public class Item implements Serializable {
 	@JoinColumn(name="category_id")
 	private Category category;
 
-//	//bi-directional many-to-one association to OrderItem
-//	@OneToMany(mappedBy="item")
-//	private List<OrderItem> orderItems;
 
 	public Item() {
 	}
@@ -77,27 +81,5 @@ public class Item implements Serializable {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
-//	public List<OrderItem> getOrderItems() {
-//		return this.orderItems;
-//	}
-//
-//	public void setOrderItems(List<OrderItem> orderItems) {
-//		this.orderItems = orderItems;
-//	}
-//
-//	public OrderItem addOrderItem(OrderItem orderItem) {
-//		getOrderItems().add(orderItem);
-//		orderItem.setItem(this);
-//
-//		return orderItem;
-//	}
-//
-//	public OrderItem removeOrderItem(OrderItem orderItem) {
-//		getOrderItems().remove(orderItem);
-//		orderItem.setItem(null);
-//
-//		return orderItem;
-//	}
 
 }

@@ -2,6 +2,7 @@ package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
@@ -46,15 +49,30 @@ public class Order implements Serializable {
 	@JoinColumn(name="bill_id")
 	private Bill bill;
 
-	//bi-directional many-to-one association to User
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="taken_by_id")
 	private User user;
 
-//	//bi-directional many-to-one association to OrderItem
-//	@OneToMany(mappedBy="order")
-//	private List<OrderItem> orderItems;
-
+	@ManyToMany
+	 	@JoinTable(
+	 		name="order_item"
+	 		, joinColumns={
+	 			@JoinColumn(name="order_id")
+	 			}
+	 		, inverseJoinColumns={
+	 			@JoinColumn(name="item_id")
+	 			}
+	 		)
+	 private List<Item> items;
+	
 	public Order() {
 	}
 
@@ -113,27 +131,5 @@ public class Order implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-//	public List<OrderItem> getOrderItems() {
-//		return this.orderItems;
-//	}
-//
-//	public void setOrderItems(List<OrderItem> orderItems) {
-//		this.orderItems = orderItems;
-//	}
-//
-//	public OrderItem addOrderItem(OrderItem orderItem) {
-//		getOrderItems().add(orderItem);
-//		orderItem.setOrder(this);
-//
-//		return orderItem;
-//	}
-//
-//	public OrderItem removeOrderItem(OrderItem orderItem) {
-//		getOrderItems().remove(orderItem);
-//		orderItem.setOrder(null);
-//
-//		return orderItem;
-//	}
 
 }

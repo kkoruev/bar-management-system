@@ -5,7 +5,7 @@ app.factory('WaiterService', ['$http',
 
 		var baseURL = 'http://localhost:8080/BarManagamentSystem/rest/user';
 
-		var ServiceAPI = {
+		var serviceAPI = {
 			startBill: startBill
 		}
 
