@@ -1,7 +1,10 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +15,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b")
+@XmlRootElement
 public class Bill implements Serializable {
 	private static final long serialVersionUID = 1L;
 

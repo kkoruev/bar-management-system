@@ -1,10 +1,12 @@
 package bg.unisofia.fmi.dao.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.BillDAO;
 import bg.unisofia.fmi.dto.BillDTO;
@@ -18,6 +20,14 @@ public class BillDAOImpl implements BillDAO {
 
 	@PersistenceContext(unitName = "barDatabase")
 	EntityManager em;
+	
+	@Override
+	public List<Bill> getOpenBillsByUser(User user) {
+		String txtQuery = "SELECT b FROM Bill b WHERE b.user = :user AND b.completedAt IS NULL";
+		TypedQuery<Bill> getUserQuery = em.createQuery(txtQuery, Bill.class);
+		getUserQuery.setParameter("user", user);
+		return getUserQuery.getResultList();
+	}
 	
 	@Override
 	public void startBill(BillDTO billDTO, User user) {
@@ -42,5 +52,6 @@ public class BillDAOImpl implements BillDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }
