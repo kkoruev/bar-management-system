@@ -34,7 +34,6 @@ public class Item implements Serializable {
 
 	private double price;
 
-	//bi-directional many-to-one association to Category
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	private Category category;

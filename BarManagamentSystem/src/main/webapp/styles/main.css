@@ -60,9 +60,13 @@ img {
 }
 
 .add-items-btn {
-	background-color: #343434;
+	background-color: #ea5455;
 	border: 0px;
 	width: 100%;
+}
+
+.add-order-btn:hover, .add-items-btn:hover {
+	background-color: #ff6666;
 }
 
 .list-orders a {
@@ -140,7 +144,7 @@ img {
 	text-align: center;
 }
 
-.form-register {
+.form-info {
 	width: 50%;
 	margin: 40px auto;
 }
@@ -168,3 +172,31 @@ img {
 }
 
 /* end of register page css */
+
+
+/* css for add-items page */
+
+.price-input {
+	width: 50%;
+}
+
+/* label[for=name] {
+	display: block;
+} */
+
+/* .input-field {
+	display: inline-block;
+	
+} */
+
+.left {
+	float: left;
+}
+
+.item-input {
+	width: 100%;
+}
+
+.required {
+	color: red;
+}

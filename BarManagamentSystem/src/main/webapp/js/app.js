@@ -14,16 +14,21 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         templateUrl: 'templates/login-page.html',
         controller: 'LoginPageController'
     })
-   .state('order-list', {
-        url: '/order-list',
-        templateUrl: 'templates/order-list.html',
-        controller: 'OrderListController'
+   .state('bartender-panel', {
+        url: '/bartender-panel',
+        templateUrl: 'templates/bartender-panel.html',
+        controller: 'BartenderController'
     })
     .state('waiter-panel', {
         url: '/waiter-panel',
         templateUrl: 'templates/waiter-panel.html',
         controller: 'WaiterController'
     })
+    .state('add-items', {
+        url: '/add-items',
+        templateUrl: 'templates/add-items.html',
+        controller: 'AddItemsController'
+    })    
      .state('register-user', {
         url: '/register-user',
         templateUrl: 'templates/register-user.html',

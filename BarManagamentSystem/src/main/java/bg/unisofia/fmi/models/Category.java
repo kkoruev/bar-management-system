@@ -2,6 +2,8 @@ package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import java.util.List;
 
 
@@ -11,6 +13,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
+@XmlRootElement
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,8 +25,8 @@ public class Category implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Item
-	@OneToMany(mappedBy="category")
-	private List<Item> items;
+//	@OneToMany(mappedBy="category")
+//	private List<Item> items;
 
 	public Category() {
 	}
@@ -44,26 +47,26 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public List<Item> getItems() {
-		return this.items;
-	}
+//	public List<Item> getItems() {
+//		return this.items;
+//	}
+//
+//	public void setItems(List<Item> items) {
+//		this.items = items;
+//	}
 
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
-
-	public Item addItem(Item item) {
-		getItems().add(item);
-		item.setCategory(this);
-
-		return item;
-	}
-
-	public Item removeItem(Item item) {
-		getItems().remove(item);
-		item.setCategory(null);
-
-		return item;
-	}
+//	public Item addItem(Item item) {
+//		getItems().add(item);
+//		item.setCategory(this);
+//
+//		return item;
+//	}
+//
+//	public Item removeItem(Item item) {
+//		getItems().remove(item);
+//		item.setCategory(null);
+//
+//		return item;
+//	}
 
 }

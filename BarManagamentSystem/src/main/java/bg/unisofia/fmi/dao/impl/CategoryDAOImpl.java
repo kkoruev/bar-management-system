@@ -1,5 +1,7 @@
 package bg.unisofia.fmi.dao.impl;
 
+import java.util.List;
+
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,11 @@ public class CategoryDAOImpl implements CategoryDAO{
 	public void addCategory(Category category) {
 		em.persist(category);
 	}
+	
+	@Override
+	public List<Category> getCategories() {
+		return em.createNamedQuery("Category.findAll", Category.class).getResultList();
+	}
+
 
 }
