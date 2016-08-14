@@ -15,10 +15,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         templateUrl: 'templates/order-list.html',
         controller: 'OrderListController'
     })
-    .state('order-items', {
-        url: '/order-items',
-        templateUrl: 'templates/order-items.html',
-        controller: 'OrderItemsController'
+    .state('waiter-panel', {
+        url: '/waiter-panel',
+        templateUrl: 'templates/waiter-panel.html',
+        controller: 'WaiterController'
     })
      .state('register-user', {
         url: '/register-user',
