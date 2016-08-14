@@ -1,7 +1,6 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +30,7 @@ public class Item implements Serializable {
 
 	private String name;
 
-	private BigDecimal price;
+	private double price;
 
 	//bi-directional many-to-one association to Category
 	@ManyToOne
@@ -66,11 +65,11 @@ public class Item implements Serializable {
 		this.name = name;
 	}
 
-	public BigDecimal getPrice() {
+	public double getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
