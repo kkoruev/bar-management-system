@@ -1,5 +1,7 @@
 package bg.unisofia.fmi.rest;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -18,6 +20,7 @@ import bg.unisofia.fmi.dto.BillDTO;
 import bg.unisofia.fmi.dto.UserDTO;
 import bg.unisofia.fmi.enums.Role;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
+import bg.unisofia.fmi.models.Bill;
 
 @Stateless
 @Path("/user")
@@ -84,6 +87,13 @@ public class UserManager {
 			return Response.serverError().build();
 		}
 		return Response.ok().build();
+	}
+	
+	@Path("/bills/open")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Bill> getOpenBillsByUser(){
+		return billDAO.getOpenBillsByUser(userContext.getUser());
 	}
 
 	 @Path("/role")

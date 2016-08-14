@@ -3,13 +3,21 @@
 app.factory('WaiterService', ['$http', 
 	function($http) {
 
-		var baseURL = 'http://localhost:8080/BarManagamentSystem/rest/user';
+		const baseURL = 'http://localhost:8080/BarManagamentSystem/rest/user';
 
 		var serviceAPI = {
+			getStartedBills: getStartedBills,
 			startBill: startBill
-		}
+		};
 
 		return serviceAPI; 
+		
+		function getStartedBills() {
+			return $http({
+				method: "GET",
+				url: baseURL + '/bills/open',
+			});
+		}
 
 		function startBill(billName) {
 			return $http({
@@ -24,7 +32,7 @@ app.factory('WaiterService', ['$http',
 					}
 				}
 			});
-		}
+		};
 
 	}
 ]);
