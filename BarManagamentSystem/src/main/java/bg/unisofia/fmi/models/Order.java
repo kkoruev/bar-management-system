@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -30,6 +31,7 @@ public class Order implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="order_id")
+	@XmlTransient
 	private int orderId;
 
 	private String comment;
@@ -47,6 +49,7 @@ public class Order implements Serializable {
 	//bi-directional many-to-one association to Bill
 	@ManyToOne
 	@JoinColumn(name="bill_id")
+	@XmlTransient
 	private Bill bill;
 
 	public List<Item> getItems() {

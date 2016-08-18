@@ -16,11 +16,10 @@ import javax.ws.rs.core.Response;
 import bg.unisofia.fmi.context.impl.UserContextImpl;
 import bg.unisofia.fmi.dao.BillDAO;
 import bg.unisofia.fmi.dao.UserDAO;
-import bg.unisofia.fmi.dto.BillDTO;
-import bg.unisofia.fmi.dto.UserDTO;
 import bg.unisofia.fmi.enums.Role;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
 import bg.unisofia.fmi.models.Bill;
+import bg.unisofia.fmi.models.User;
 
 @Stateless
 @Path("/user")
@@ -38,9 +37,9 @@ public class UserManager {
 	@Path("/register")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addUser(UserDTO userDTO) {
+	public Response addUser(User user) {
 		try {
-			userDAO.registerUser(userDTO);
+			userDAO.registerUser(user);
 		} catch (Exception e) {
 			return Response.serverError().build();
 		}
@@ -58,11 +57,11 @@ public class UserManager {
 	@Path("/login")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response loginUser(UserDTO userDTO) {
+	public Response loginUser(User user) {
 		try {
-			if (userDAO.authenticateUser(userDTO.getUsername(),
-					userDTO.getPassword())) {
-				userContext.setUser(userDAO.findByUsername(userDTO
+			if (userDAO.authenticateUser(user.getUsername(),
+					user.getPassword())) {
+				userContext.setUser(userDAO.findByUsername(user
 						.getUsername()));
 				return Response.ok().build();
 			}
@@ -75,9 +74,9 @@ public class UserManager {
 	@Path("/bills")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createBill(BillDTO billDTO) {
+	public Response createBill(Bill bill) {
 		try{
-			billDAO.startBill(billDTO, userContext.getUser());
+			billDAO.startBill(bill, userContext.getUser());
 		}
 		catch (InvalidUserException e) {
 			//TODO return 400 BAD REQEUST

@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.BillDAO;
-import bg.unisofia.fmi.dto.BillDTO;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
 import bg.unisofia.fmi.models.Bill;
 import bg.unisofia.fmi.models.Order;
@@ -30,14 +29,11 @@ public class BillDAOImpl implements BillDAO {
 	}
 	
 	@Override
-	public void startBill(BillDTO billDTO, User user) {
+	public void startBill(Bill bill, User user) {
 		if (user == null) { 
 			throw new InvalidUserException();
 		}
-		Bill bill = new Bill();
-		bill.setTableName(billDTO.getTableName());
 		bill.setUser(user);
-		bill.setCreatedAt(new Date());
 		em.persist(bill);
 	}
 

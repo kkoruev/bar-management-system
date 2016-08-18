@@ -6,30 +6,25 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.CategoryDAO;
 import bg.unisofia.fmi.dao.ItemDAO;
-import bg.unisofia.fmi.dto.ItemDTO;
 import bg.unisofia.fmi.models.Category;
 import bg.unisofia.fmi.models.Item;
 
 @Singleton
-public class ItemDAOImpl implements ItemDAO{
+public class ItemDAOImpl implements ItemDAO {
 
 	@PersistenceContext
 	EntityManager em;
-	
+
 	@EJB
 	CategoryDAO categoryDAO;
-	
+
 	@Override
-	public void addItem(ItemDTO itemDTO) {
-		Item item = new Item();
-		item.setName(itemDTO.getName());
-		item.setPrice(itemDTO.getPrice());
-		item.setDescription(itemDTO.getDescription());
-		Category category = categoryDAO.getCategory(itemDTO.getCategoryName());
+	public void addItem(Item item) {
+		Category category = categoryDAO.getCategory(item.getCategory()
+				.getName());
 		item.setCategory(category);
 		em.persist(item);
 	}

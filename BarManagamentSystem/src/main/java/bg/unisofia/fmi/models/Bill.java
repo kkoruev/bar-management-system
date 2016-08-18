@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Bill implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="bill_id")
+	@XmlTransient
 	private int billId;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -38,10 +40,12 @@ public class Bill implements Serializable {
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="owner_id")
+	@XmlTransient
 	private User user;
 
 	//bi-directional many-to-one association to Order
 	@OneToMany(mappedBy="bill")
+	@XmlTransient
 	private List<Order> orders;
 
 	public Bill() {

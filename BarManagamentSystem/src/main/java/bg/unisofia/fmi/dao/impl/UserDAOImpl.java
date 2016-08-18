@@ -6,11 +6,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.UserDAO;
-import bg.unisofia.fmi.dto.UserDTO;
-import bg.unisofia.fmi.models.User;
-import bg.unisofia.fmi.utils.EncryptionUtils;
 import bg.unisofia.fmi.enums.Role;
 import bg.unisofia.fmi.exceptions.InvalidRoleException;
+import bg.unisofia.fmi.models.User;
+import bg.unisofia.fmi.utils.EncryptionUtils;
 
 @Singleton
 public class UserDAOImpl implements UserDAO {
@@ -26,19 +25,17 @@ public class UserDAOImpl implements UserDAO {
 	 * User)
 	 */
 	@Override
-	public void registerUser(UserDTO userDTO) throws Exception{
-		if (findByUsername(userDTO.getUsername()) != null){
-			throw new Exception("User with name " + userDTO.getUsername() + " exists");
+	public void registerUser(User user) throws Exception{
+		if (findByUsername(user.getUsername()) != null){
+			throw new Exception("User with name " + user.getUsername() + " exists");
 		}
-		if(!Role.contains(userDTO.getRole())) {
+		if(!Role.contains(user.getRole())) {
 			throw new InvalidRoleException();
 		}
+		
 		String salt = EncryptionUtils.generateSalt();
-		String hashedPassword = EncryptionUtils.getHashedPassword(userDTO.getUsername(), salt);
-		User user = new User();
-		user.setRole(userDTO.getRole());
-		user.setUsername(userDTO.getUsername());
-		user.setName(userDTO.getName());
+		String hashedPassword = EncryptionUtils.getHashedPassword(user.getPassword(), salt);
+
 		user.setPasswordHash(hashedPassword);
 		user.setPasswordSalt(salt);
 		em.persist(user);

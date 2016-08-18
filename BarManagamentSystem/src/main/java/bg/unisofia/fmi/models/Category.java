@@ -1,8 +1,10 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class Category implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="category_id")
+	@XmlTransient
 	private int categoryId;
 
 	private String name;

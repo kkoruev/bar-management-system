@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import bg.unisofia.fmi.dao.ItemDAO;
-import bg.unisofia.fmi.dto.ItemDTO;
 import bg.unisofia.fmi.models.Item;
 
 
@@ -26,9 +25,9 @@ public class ItemManager {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addItem(ItemDTO itemDTO) {
+	public Response addItem(Item item) {
 		try {
-			itemDAO.addItem(itemDTO);
+			itemDAO.addItem(item);
 		} catch (Exception e) {
 			return Response.serverError().build();
 			// TODO: handle exception

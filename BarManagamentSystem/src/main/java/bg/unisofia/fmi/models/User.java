@@ -1,7 +1,11 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import java.util.List;
 
 
@@ -9,11 +13,13 @@ import java.util.List;
  * The persistent class for the user database table.
  * 
  */
+@XmlRootElement
 @Entity
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@XmlTransient
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_id")
@@ -21,9 +27,11 @@ public class User implements Serializable {
 
 	private String name;
 
+	@XmlTransient
 	@Column(name="password_hash")
 	private String passwordHash;
 
+	@XmlTransient
 	@Column(name="password_salt")
 	private String passwordSalt;
 
@@ -32,14 +40,27 @@ public class User implements Serializable {
 	private String username;
 
 	//bi-directional many-to-one association to Bill
+	@XmlTransient
 	@OneToMany(mappedBy="user")
 	private List<Bill> bills;
 
 	//bi-directional many-to-one association to Order
+	@XmlTransient
 	@OneToMany(mappedBy="user")
 	private List<Order> orders;
+	
+	@Transient
+	private String password;
 
 	public User() {
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public int getUserId() {
