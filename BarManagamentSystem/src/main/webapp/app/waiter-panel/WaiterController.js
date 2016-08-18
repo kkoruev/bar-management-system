@@ -5,6 +5,7 @@ app.controller('WaiterController', ['$scope', 'WaiterService',
         
         $scope.billName;
         $scope.bills;
+        $scope.orders = [];
 
         init();
 
@@ -32,6 +33,15 @@ app.controller('WaiterController', ['$scope', 'WaiterService',
                 //TODO: add error handling
             })
         } 
+
+
+        $scope.openBill = function(bill) {
+            if(bill.orders !== undefined) {
+                $scope.orders = bill.orders;
+            } else {
+                $scope.orders = [];
+            }
+        }
 
     }
 ]);

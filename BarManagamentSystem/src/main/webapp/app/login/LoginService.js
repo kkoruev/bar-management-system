@@ -7,12 +7,12 @@ app.factory('LoginService', ['$http',
         var baseURL = 'http://localhost:8080/BarManagamentSystem/rest/user';
 
         var serviceAPI = {
-            loginUser: loginUser
-        }
+            login: login
+        };
 
         return serviceAPI; 
 
-        function loginUser(user) {
+        function login(user) {
             return $http({
                 method: "POST",
                 url: baseURL + '/login',

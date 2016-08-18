@@ -2,16 +2,15 @@
     <div class="row">
         <header class="col-sm-3 col-xs-12 sidebar">
             <div id="logo-top">
-                <a href="/"> <img class="img-responsive logo" src="img/java.png"
-                    alt="JavaEE BAR">
-                </a>
+                <img class="img-responsive logo" src="img/java.png"
+                alt="JavaEE BAR">
             </div>
             <div class="orders-list">
                 <button type="button" class="btn btn-success add-order-btn"
                         data-toggle="modal"
                         data-target="#myModalHorizontal">Add order</button>                 
                 <div class="list-group list-orders" ng-repeat="bill in bills">
-                    <a href="#" class="list-group-item"> {{bill.tableName}} </a> 
+                    <a class="list-group-item" ng-click="openBill(bill)"> {{bill.tableName}} </a> 
                 </div>
             </div>
         </header>
@@ -35,6 +34,7 @@
                             <th>Name</th>
                             <th>Quantity</th>
                             <th>Price</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -2,21 +2,19 @@
 	<div class="row">
 		<header class="col-sm-3 col-xs-12 sidebar">
 			<div id="logo-top">
-				<a href="/"> <img class="img-responsive logo" src="img/java.png"
-					alt="JavaEE BAR">
-				</a>
+				<img class="img-responsive logo" src="img/java.png" alt="JavaEE BAR">
 			</div>
 			<nav>
 				<ul class="nav sidebar-nav">
-					<li><a href="#register-user">User registration</a></li>
-					<li><a href="#add-items">Add items</a></li>
+					<li><a href="#">Menu 1</a></li>
+					<li><a href="#">Menu 2</a></li>
 					<li><a href="#">Menu 3</a></li>
 				</ul>
 			</nav>
 		</header>
 		<div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
 			<h3>REGISTER</h3>
-			<form ng-submit="registerUser(registerForm, registerInfo)" name="registerForm" class="form-info" novalidate>
+			<form ng-submit="registerUser(registerForm, registerInfo)" name="registerForm" class="form-register">
 				<div class="form-group">
 					<label for="name">Name</label>
 					<input type="text" required

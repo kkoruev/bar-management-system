@@ -1,31 +1,31 @@
 /*  .page-content {
-	height: 100%;
-	width: 100%;
-	background-image: url("../img/bar-wallpaper.jpg");
+    height: 100%;
+    width: 100%;
+    background-image: url("../img/bar-wallpaper.jpg");
 } */
  
 /* css for login page*/
 .form-container {
-	width: 27%;
-	margin: 150px auto;
-	padding: 40px;
-	border: 2px ridge rgba(238, 238, 238, 0.13);
-	border-radius: 5px;
-	-moz-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
-	-webkit-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
-	box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
-	border-bottom: none;
-	background-color: rgba(19, 6, 6, 0.5);
+    width: 27%;
+    margin: 150px auto;
+    padding: 40px;
+    border: 2px ridge rgba(238, 238, 238, 0.13);
+    border-radius: 5px;
+    -moz-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    -webkit-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    border-bottom: none;
+    background-color: rgba(19, 6, 6, 0.5);
 }
 
 .form-title {
-	text-align: center;
-	color: #fff;
-	
+    text-align: center;
+    color: #fff;
+    
 }
 
 .form-content {
-	margin-top: 30px;
+    margin-top: 30px;
 }
 
 /* end of login page css */
@@ -34,94 +34,93 @@
 
 
 .sidebar {
-	background-color: #343434;
-	color: #fff;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
+    background-color: #343434;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .logo {
-	width: 50%;
+    width: 50%;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 
 img {
-	margin: 0 auto;
+    margin: 0 auto;
 }
 
 
 .add-order-btn {
-	width: 100%;
-	margin: 30px 0;
-	border: 0px;
-	background-color: #ea5455;
-/* 	float:left; */
+    width: 100%;
+    margin: 30px 0;
+    border: 0px;
+    background-color: #ea5455;
+/*  float:left; */
 }
 
 .add-items-btn {
-	background-color: #ea5455;
-	border: 0px;
-	width: 100%;
-}
-
-.add-order-btn:hover, .add-items-btn:hover {
-	background-color: #ff6666;
+    background-color: #343434;
+    border: 0px;
+    width: 100%;
 }
 
 .list-orders a {
-	background-color: none;
-	margin-top: 5px;
-	background-color: #fde9c9;
-	border: none;
+    background-color: none;
+    margin-top: 5px;
+    background-color: #fde9c9;
+    border: none;
 }
 
 .search-bar {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .order-table {
-	margin: 30px;
+    margin: 30px;
 }
 
 /* #main-content {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	background-image: url("../img/bar1.jpg");
-	background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background-image: url("../img/bar1.jpg");
+    background-repeat: no-repeat;
 } */
 
 /* css for register user page
  */
  
  .sidebar-nav {
- 	margin-top: 30px;
+    margin-top: 30px;
  }
  
  
 .sidebar-nav li:before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
-	height: 100%;
-	width: 0;
-	background-color: #ea5455;
-	-webkit-transition: width .2s ease-in;
-	-moz-transition: width .2s ease-in;
-	-ms-transition: width .2s ease-in;
-	transition: width .2s ease-in;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 0;
+    background-color: #ea5455;
+    -webkit-transition: width .2s ease-in;
+    -moz-transition: width .2s ease-in;
+    -ms-transition: width .2s ease-in;
+    transition: width .2s ease-in;
 }
 
 .sidebar-nav li:hover:before {
     width: 100%;
     -webkit-transition: width .2s ease-in;
-      -moz-transition:  width .2s ease-in;
-       -ms-transition:  width .2s ease-in;
+       -moz-transition: width .2s ease-in;
+        -ms-transition: width .2s ease-in;
             transition: width .2s ease-in;
-
 }
 
 .sidebar-nav li a:hover,
@@ -136,67 +135,39 @@ img {
 }
 
 .sidebar-nav li a {
-	margin: 10px;
-	color: #fff;
+    margin: 10px;
+    color: #fff;
 }
 
 .sidebar-nav li {
-	text-align: center;
+    text-align: center;
 }
 
-.form-info {
-	width: 50%;
-	margin: 40px auto;
+.form-register {
+    width: 50%;
+    margin: 40px auto;
 }
 
 #main-content h3{
     width: 50%;
-	margin: 40px auto; 
-	text-align: center;
-	background-color: #2c3e50;
-	padding: 10px;
-	color: #fff;
-	border-radius: 5px;
+    margin: 40px auto; 
+    text-align: center;
+    background-color: #2c3e50;
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
 }
 
 
 .btn-submit {
-	float: right;
+    float: right;
 }
 
 .validation-message {
-	color: #d60707;
+    color: #d60707;
     display: block;
     margin-top: 2px;
     margin-left: 2px;
 }
 
 /* end of register page css */
-
-
-/* css for add-items page */
-
-.price-input {
-	width: 50%;
-}
-
-/* label[for=name] {
-	display: block;
-} */
-
-/* .input-field {
-	display: inline-block;
-	
-} */
-
-.left {
-	float: left;
-}
-
-.item-input {
-	width: 100%;
-}
-
-.required {
-	color: red;
-}
