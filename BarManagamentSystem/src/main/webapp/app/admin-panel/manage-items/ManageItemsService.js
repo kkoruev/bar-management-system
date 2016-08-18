@@ -1,13 +1,25 @@
 'use strict';
 
-app.factory('ManageItemsService', ['',
-    function() {
+app.factory('ManageItemsService', ['$http',
+    function($http) {
 
-        var serviceAPI = {
-
+        var baseURL = 'http://localhost:8080/BarManagamentSystem/rest';
+        
+        var servicesAPI = {
+            getCategories:  getCategories
         };
+        
+        return servicesAPI;
 
-        return serviceAPI;
+        function getCategories() {
+            return $http ({
+                method: 'GET',
+                url: baseURL + '/categories',
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            });
+        }
 
     }
 ]);

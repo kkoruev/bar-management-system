@@ -1,70 +1,70 @@
 <div class="container-fluid">
-	<div class="row">
-		<header class="col-sm-3 col-xs-12 sidebar">
-			<div id="logo-top">
-				<img class="img-responsive logo" src="img/java.png" alt="JavaEE BAR">
-			</div>
-			<nav>
-				<ul class="nav sidebar-nav">
-					<li><a href="#">Menu 1</a></li>
-					<li><a href="#">Menu 2</a></li>
-					<li><a href="#">Menu 3</a></li>
-				</ul>
-			</nav>
-		</header>
-		<div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
-			<h3>REGISTER</h3>
-			<form ng-submit="registerUser(registerForm, registerInfo)" name="registerForm" class="form-register">
-				<div class="form-group">
-					<label for="name">Name</label>
-					<input type="text" required
-						   class="form-control"
-						   id="name" 
-						   name="name"
-						   placeholder="Name"
-						   ng-model="registerInfo.name">
-					<span class="validation-message" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">Name is required</span>	   
-				</div>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" required
-						   class="form-control"
-						   id="username"
-						   name="username"
-						   placeholder="Username"
-						   ng-model="registerInfo.username">
-					<span class="validation-message" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">Username is required</span>
-				</div>
-				<div class="form-group">
-    				<label for="password">Password</label>
-    				<input type="password" required
-    						class="form-control"
-    						id="password"
-    						name="password"
-    					    placeholder="Password"
-    					    ng-model="registerInfo.password">
-    				<span class="validation-message" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">Password is required</span>
- 				 </div>
- 				 <div class="form-group">
-    				<label for="repeatPassword">Repeat password</label>
-    				<input type="password" required
-    						class="form-control" 
-    						id="repeatPassword" 
-    						name="repeatPassword"
-    						placeholder="Repeat password"
-    						ng-model="repeatPassword"
-    						password-match="registerInfo.password">    		
-    				<span class="validation-message" ng-show="registerForm.repeatPassword.$dirty && registerForm.repeatPassword.$invalid">Password doesn`t match</span>
- 				 </div>
-				<div class="form-group">
-					<label for="role">Example select</label>
-						 <select ng-model="registerInfo.role" ng-options="role as role for role in roles" class="form-control" id="role" name="role">
-						 </select>
-					<span ng-show="registerForm.role.$dirty && registerForm.role.$invalid">Error</span>
-				</div>
-				<button type="submit" class="btn btn-primary btn-submit">Submit</button>
-			</form>
-		
-		</div>
-	</div>
+    <div class="row">
+        <header class="col-sm-3 col-xs-12 sidebar">
+            <div id="logo-top">
+                <img class="img-responsive logo" src="img/java.png" alt="JavaEE BAR">
+            </div>
+            <nav>
+                <ul class="nav sidebar-nav">
+                    <li><a href="#">Menu 1</a></li>
+                    <li><a href="#">Menu 2</a></li>
+                    <li><a href="#">Menu 3</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
+            <h3>REGISTER</h3>
+            <form ng-submit="registerUser(registerForm, registerInfo)" name="registerForm" class="form-info" novalidate>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" required
+                           class="form-control"
+                           id="name" 
+                           name="name"
+                           placeholder="Name"
+                           ng-model="registerInfo.name">
+                    <span class="validation-message" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">Name is required</span>      
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" required
+                           class="form-control"
+                           id="username"
+                           name="username"
+                           placeholder="Username"
+                           ng-model="registerInfo.username">
+                    <span class="validation-message" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">Username is required</span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" required
+                            class="form-control"
+                            id="password"
+                            name="password"
+                            placeholder="Password"
+                            ng-model="registerInfo.password">
+                    <span class="validation-message" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">Password is required</span>
+                 </div>
+                 <div class="form-group">
+                    <label for="repeatPassword">Repeat password</label>
+                    <input type="password" required
+                            class="form-control" 
+                            id="repeatPassword" 
+                            name="repeatPassword"
+                            placeholder="Repeat password"
+                            ng-model="repeatPassword"
+                            password-match="registerInfo.password">         
+                    <span class="validation-message" ng-show="registerForm.repeatPassword.$dirty && registerForm.repeatPassword.$invalid">Password doesn`t match</span>
+                 </div>
+                <div class="form-group">
+                    <label for="role">Example select</label>
+                         <select ng-model="registerInfo.role" ng-options="role as role for role in roles" class="form-control" id="role" name="role">
+                         </select>
+                    <span ng-show="registerForm.role.$dirty && registerForm.role.$invalid">Error</span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+        
+        </div>
+    </div>
 </div>

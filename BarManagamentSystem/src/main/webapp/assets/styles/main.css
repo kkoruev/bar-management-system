@@ -143,7 +143,7 @@ img {
     text-align: center;
 }
 
-.form-register {
+.form-info {
     width: 50%;
     margin: 40px auto;
 }
@@ -171,3 +171,29 @@ img {
 }
 
 /* end of register page css */
+/* css for add-items page */
+
+.price-input {
+    width: 50%;
+}
+
+/* label[for=name] {
+    display: block;
+} */
+
+/* .input-field {
+    display: inline-block;
+    
+} */
+
+.left {
+    float: left;
+}
+
+.item-input {
+    width: 100%;
+}
+
+.required {
+    color: red;
+}

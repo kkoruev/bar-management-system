@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+        <header class="col-sm-3 col-xs-12 sidebar">
+            <div id="logo-top">
+                <a href="/"> <img class="img-responsive logo" src="img/java.png"
+                    alt="JavaEE BAR">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav sidebar-nav">
+                    <li><a href="#register-user">User registration</a></li>
+                    <li><a href="#add-items">Add items</a></li>
+                    <li><a href="#">Menu 3</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
+            <h3>Add item {{addItemForm.name.$dirty}} </h3>
+            <form class="form-info" name="addItemForm" ng-submit="showMessage(addItemForm.price)" novalidate>
+                <div class="form-group">
+                    <label for="name">Name<span class="required">*</span></label> 
+                    <input type="text" required
+                            class="form-control item-input" 
+                            id="name" 
+                            name="name">
+                    <span class="validation-message" 
+                          ng-show="addItemForm.name.$dirty && addItemForm.name.$invalid">Name is required
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price <span class="required">*</span></label> 
+                    <input type="text" required
+                        class="form-control price-input" 
+                        id="price" name="price" 
+                        placeholder="&#8364"> 
+                    <span class="validation-message" 
+                          ng-show="addItemForm.price.$dirty && addItemForm.price.$invalid">Price is required</span>
+                </div>
+                <div class="form-group">
+                    <label for="category">Select category</label>
+                         <select ng-model="itemsInfo.category" 
+                                 ng-options="category.name for category in categories" 
+                                 class="form-control" 
+                                 id="category" 
+                                 name="category">
+                         </select>
+                    <span ng-show="addItemForm.category.$dirty && addItemForm.category.$invalid">Error</span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleTextarea">Description</label>
+                    <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
