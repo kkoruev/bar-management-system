@@ -9,6 +9,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -97,8 +98,28 @@ public class UserManager {
 
 	 @Path("/role")
 	 @GET
-	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.APPLICATION_JSON)
 	 public String getUserName() {
 		 return userContext.getUser().getRole();
 	 }
+	 
+	 @Path("/orders")
+	 @POST
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 public Response addOrder(Bill bill) {
+		 
+		 return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+	 }
+	 
+	 @Path("/orders/{billId}")
+	 @GET
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Response getOrders(@PathParam("billId") int billId) {
+		 try {
+			 return Response.ok().entity(billDAO.getOrders(billId)).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+		}
+	 }
+	 
 }

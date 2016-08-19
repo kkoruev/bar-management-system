@@ -5,6 +5,7 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
         
         $scope.billName;
         $scope.bills;
+        $scope.currentBill = {};
         $scope.items;
         $scope.selectedItem = {};
 
@@ -43,6 +44,14 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
 
 
         $scope.openBill = function(bill) {
+            $scope.currentBill = bill;
+            WaiterService.getOrdersForBill(bill)
+            .then((data) => {
+                debugger;
+            })
+            .catch((error) => {
+                debugger;
+            })
             if(bill.orders !== undefined) {
                 $scope.orders = bill.orders;
             } else {
@@ -56,6 +65,16 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
                 price: selectedItem.item.price,
                 quantity: selectedItem.quantity
             });
+        }
+
+        $scope.submitOrder = function() {
+            WaiterService.addOrders($scope.currentBill, $scope.newOrdersGrid)
+            .then((data) => {
+                debugger
+            })
+            .catch((error) => {
+                debugger;
+            })
         }
 
     }

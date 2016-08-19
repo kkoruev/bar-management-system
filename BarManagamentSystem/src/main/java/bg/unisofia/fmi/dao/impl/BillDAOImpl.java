@@ -40,9 +40,17 @@ public class BillDAOImpl implements BillDAO {
 		bill.setUser(user);
 		em.persist(bill);
 	}
+	
+	@Override
+	public List<Order> getOrders(int billId) {
+		String txtQuery = "SELECT b FROM Bill b WHERE b.billId = :billId";
+		TypedQuery<Bill> getBillsQuery = em.createQuery(txtQuery, Bill.class);
+		getBillsQuery.setParameter("billId", billId);
+		return getBillsQuery.getSingleResult().getOrders(); 
+	}
 
 	@Override
-	public void addOrder(Order order) {
+	public void addOrder(Bill bill) {
 		// TODO Auto-generated method stub
 		
 	}

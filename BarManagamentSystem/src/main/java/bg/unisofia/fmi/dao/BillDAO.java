@@ -12,9 +12,11 @@ public interface BillDAO {
 	
 	void startBill(Bill bill, User user);
 	
-	void addOrder(Order order);
+	void addOrder(Bill bill);
 	
 	float endBill();
+
+	List<Order> getOrders(int billId);
 
 
 	
