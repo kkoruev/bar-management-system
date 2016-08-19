@@ -33,3 +33,7 @@ app.config(['$stateProvider', '$urlRouterProvider', 'RouteConstants',
         $urlRouterProvider.otherwise('/login');
 	}
 ]);
+
+app.run(function($rootScope, RouteConstants) {
+    $rootScope.RouteConstants = RouteConstants;
+});

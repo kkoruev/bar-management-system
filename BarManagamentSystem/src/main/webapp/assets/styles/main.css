@@ -99,7 +99,6 @@ img {
     margin-top: 30px;
  }
  
- 
 .sidebar-nav li:before {
     content: '';
     position: absolute;
@@ -123,18 +122,20 @@ img {
             transition: width .2s ease-in;
 }
 
-.sidebar-nav li a:hover,
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus,
-.sidebar-nav li.open a:hover,
-.sidebar-nav li.open a:active,
-.sidebar-nav li.open a:focus{
+.sidebar-nav li:hover,
+.sidebar-nav li:active,
+.sidebar-nav li:focus,
+.sidebar-nav li.open:hover,
+.sidebar-nav li.open:active,
+.sidebar-nav li.open:focus{
     color: #fff;
     text-decoration: none;
     background-color: transparent;
+    cursor: pointer;
 }
 
-.sidebar-nav li a {
+.sidebar-nav li {
+    padding: 5px 0;
     margin: 10px;
     color: #fff;
 }
@@ -196,4 +197,12 @@ img {
 
 .required {
     color: red;
+}
+
+h3 {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    cursor: default;
 }
