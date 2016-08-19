@@ -19,7 +19,7 @@ app.factory('RegisterUserService', ['$http',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                data: {"userDTO" : registerInfo}
+                data: {"user" : registerInfo}
             });
         }
         

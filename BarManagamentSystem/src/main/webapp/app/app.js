@@ -4,7 +4,9 @@ var app = angular.module('BarManagementSystem', [
     'ui.bootstrap', 
     'ngRoute',
     'ngResource',
-    'ui.router' 
+    'ui.router',
+    'toastr',
+    'ngAnimate' 
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', 'RouteConstants',
@@ -36,4 +38,18 @@ app.config(['$stateProvider', '$urlRouterProvider', 'RouteConstants',
 
 app.run(function($rootScope, RouteConstants) {
     $rootScope.RouteConstants = RouteConstants;
+});
+
+app.config(function(toastrConfig) {
+    angular.extend(toastrConfig, {
+        autoDismiss: true,
+        containerId: 'toast-container',
+        maxOpened: 1,
+        newestOnTop: true,
+        positionClass: 'toast-bottom-center',
+        target: 'body',
+        timeOut: 3500,
+        extendedTimeOut: 2000,
+        tapToDismiss: true
+    });
 });

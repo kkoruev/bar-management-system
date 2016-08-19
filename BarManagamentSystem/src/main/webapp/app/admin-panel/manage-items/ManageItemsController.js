@@ -1,10 +1,10 @@
 'use strict';
 
 app.controller('ManageItemsController', [
-    '$scope', 'ManageItemsService', 
-    function($scope, ManageItemsService) {
+    '$scope', 'ManageItemsService', 'toastr', 
+    function($scope, ManageItemsService, toastr) {
 
-        $scope.itemsInfo = {};
+        $scope.item = {};
         $scope.categories;
 
         getCategories();
@@ -12,7 +12,6 @@ app.controller('ManageItemsController', [
         function getCategories() {
             ManageItemsService.getCategories()
             .then(function(data) {
-                console.log("success");
                 $scope.categories = data.data.category;
             })
             .catch((error) => {
@@ -20,9 +19,20 @@ app.controller('ManageItemsController', [
             });
         }
 
-        $scope.showMessage = function(name) {
-            debugger;
-            console.log('hey');
+        $scope.addItem = function(addItemForm, item) {
+            return ManageItemsService.addItem(item)
+            .then((data) => {
+                toastr.success("Item successfully added");
+                console.log(data);
+            })
+            .catch((error) => {
+                toastr.error("Error on adding new idem");
+                console.log(error);
+            })
+            .finally(() => {
+               addItemForm.$setPristine();
+               $scope.item = {};
+            });
         }
     }
 ]);

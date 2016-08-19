@@ -27,12 +27,13 @@ public class ItemManager {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addItem(Item item) {
 		try {
+			System.out.println(item);
 			itemDAO.addItem(item);
 		} catch (Exception e) {
 			return Response.serverError().build();
 			// TODO: handle exception
 		}
-		return Response.ok().build();
+		return Response.status(Response.Status.CREATED).build();
 	}
 	
 	@GET
