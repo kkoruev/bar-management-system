@@ -1,10 +1,7 @@
-'use strict'
+'use strict';
 
-
-app.factory('LoginService', ['$http', 
-    function($http) {
-
-        var baseURL = 'http://localhost:8080/BarManagamentSystem/rest/user';
+app.factory('LoginService', ['$http', 'AppConstants',
+    function($http, AppConstants) {
 
         var serviceAPI = {
             login: login
@@ -15,12 +12,12 @@ app.factory('LoginService', ['$http',
         function login(user) {
             return $http({
                 method: "POST",
-                url: baseURL + '/login',
+                url: AppConstants.BASE_URL + '/user/login',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 data: {
-                    "userDTO" : user
+                    "user" : user
                 }
             });
         }

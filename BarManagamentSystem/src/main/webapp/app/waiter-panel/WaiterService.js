@@ -1,7 +1,7 @@
 'use strict';
 
-app.factory('WaiterService', ['$http', 
-    function($http) {
+app.factory('WaiterService', ['$http', 'AppConstants', '$q',
+    function($http, AppConstants, $q) {
 
         const baseURL = 'http://localhost:8080/BarManagamentSystem/rest/user';
 
@@ -33,6 +33,16 @@ app.factory('WaiterService', ['$http',
                 }
             });
         };
+
+        function getOrdersForBill(bill) {
+            return $http.get(AppConstants.BASE_URL + '/user/orders')
+            .then((data) => {
+                $q.resolve(data);
+            })
+            .catch((error) => {
+                $q.reject(error);
+            })
+        }
 
 
     }

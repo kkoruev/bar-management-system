@@ -81,7 +81,12 @@ img {
 }
 
 .order-table {
-    margin: 30px;
+    margin: 20px;
+}
+
+.new-items {
+  color: #16cc25;
+  font-size: 1.05em;
 }
 
 /* #main-content {

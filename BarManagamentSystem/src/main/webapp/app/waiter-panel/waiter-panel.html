@@ -2,7 +2,7 @@
     <div class="row">
         <header class="col-sm-3 col-xs-12 sidebar">
             <div id="logo-top">
-                <img class="img-responsive logo" src="img/java.png"
+                <img class="img-responsive logo" src="assets/img/java.png"
                 alt="JavaEE BAR">
             </div>
             <div class="orders-list">
@@ -17,17 +17,28 @@
         <div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
             <div class="row search-bar">
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" placeholder="Search items">
+                    <input type="text" class="form-control" placeholder="Search items"
+                    bs-options="item as item.name for item in items"
+                    ng-model="selectedItem.item"
+                    bs-typeahead
+                    >
                 </div>
                 <!-- /.col-lg-6 -->
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" placeholder="Qty">
+                    <input type="number" min="1" 
+                        class="form-control" placeholder="Qty"
+                        ng-model="selectedItem.quantity"
+                    >
                 </div>
                 <div class="col-sm-3">
-                    <button type="button" class="btn btn-warning add-items-btn">Add</button>
+                    <button type="button" 
+                        class="btn btn-warning add-items-btn"
+                        ng-click="addToOrder(selectedItem)"
+                        > Add
+                    </button>
                 </div>
-            </div>
-            <div class="order-table">
+            </div>  
+            <div class="order-table" ng-show="newOrdersGrid.length > 0">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -38,25 +49,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Fries</td>
-                            <td>1</td>
-                            <td>$230</td>
-                        </tr>
-                        <tr>
-                            <td>Fries</td>
-                            <td>1</td>
-                            <td>$230</td>
-                        </tr>
-                        <tr>
-                            <td>Fries</td>
-                            <td>1</td>
-                            <td>$230</td>
+                        <tr class="new-items" ng-repeat="item in newOrdersGrid">
+                            <th>{{item.name}}</th>
+                            <th>{{item.quantity}}</th>
+                            <th>{{item.price | number:2}}</th>
+                            <th>{{item.quantity * item.price | number:2}}</th>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <button type="button" class="btn btn-primary btn-lg" ng-click="getBills()">TOTAL: 12$</button>
+            <button type="submit" class="btm pull-right" ng-click="submitOrder()">Submit</button>
+
+            <div class="order-table" ng-show="previousOrdersGrid.length > 0">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in previousOrdersGrid">
+                            <th>{{item.name}}</th>
+                            <th>{{item.quantity}}</th>
+                            <th>{{item.price | number:2}}</th>
+                            <th>{{item.quantity * item.price | number:2}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12 col-sm-10"> 
+                <span class="pull-right">Grand Total: {{}}</span>
+            </div>
+
         </div>
 
         <div class="modal fade" id="myModalHorizontal" tabindex="-1"

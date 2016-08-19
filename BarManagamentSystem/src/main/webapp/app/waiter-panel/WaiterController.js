@@ -1,11 +1,15 @@
 'use strict';
 
-app.controller('WaiterController', ['$scope', 'WaiterService', 
-    function($scope, WaiterService) {
+app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'ManageItemsService',
+    function($scope, WaiterService, toastr, ManageItemsService) {
         
         $scope.billName;
         $scope.bills;
-        $scope.orders = [];
+        $scope.items;
+        $scope.selectedItem = {};
+
+        $scope.previousOrdersGrid = [{name: "potatoes",quantity: 3,price: 4.7},{name: "Pizza Palermo",quantity: 2,price: 7.8}];
+        $scope.newOrdersGrid = [];
 
         init();
 
@@ -13,7 +17,10 @@ app.controller('WaiterController', ['$scope', 'WaiterService',
             return WaiterService.getStartedBills()
             .then((data) => {
                 $scope.bills = data.data.bill;
-                console.log(data);
+                return ManageItemsService.getItems();
+            })
+            .then((items) => {
+                $scope.items = items;
             })
             .catch((error) => {
                 console.log(error);
@@ -41,6 +48,14 @@ app.controller('WaiterController', ['$scope', 'WaiterService',
             } else {
                 $scope.orders = [];
             }
+        }
+
+        $scope.addToOrder = function(selectedItem) {
+            $scope.newOrdersGrid.push({
+                name: selectedItem.item.name,
+                price: selectedItem.item.price,
+                quantity: selectedItem.quantity
+            });
         }
 
     }

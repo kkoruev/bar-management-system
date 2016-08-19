@@ -45,7 +45,6 @@ public class Bill implements Serializable {
 
 	//bi-directional many-to-one association to Order
 	@OneToMany(mappedBy="bill")
-	@XmlTransient
 	private List<Order> orders;
 
 	public Bill() {

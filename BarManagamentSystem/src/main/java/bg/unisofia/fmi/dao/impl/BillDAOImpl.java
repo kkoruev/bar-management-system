@@ -1,6 +1,5 @@
 package bg.unisofia.fmi.dao.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Singleton;
@@ -23,9 +22,14 @@ public class BillDAOImpl implements BillDAO {
 	@Override
 	public List<Bill> getOpenBillsByUser(User user) {
 		String txtQuery = "SELECT b FROM Bill b WHERE b.user = :user AND b.completedAt IS NULL";
-		TypedQuery<Bill> getUserQuery = em.createQuery(txtQuery, Bill.class);
-		getUserQuery.setParameter("user", user);
-		return getUserQuery.getResultList();
+		TypedQuery<Bill> getBillsQuery = em.createQuery(txtQuery, Bill.class);
+		getBillsQuery.setParameter("user", user);
+		return getBillsQuery.getResultList();
+//		List<Bill> bills = getBillsQuery.getResultList();
+//		for(Bill bill : bills) {
+//			bill.getOrders().size();
+//		}
+//		return bills;
 	}
 	
 	@Override

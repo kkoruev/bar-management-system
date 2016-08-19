@@ -6,7 +6,8 @@ var app = angular.module('BarManagementSystem', [
     'ngResource',
     'ui.router',
     'toastr',
-    'ngAnimate' 
+    'ngAnimate',
+    'mgcrea.ngStrap' 
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', 'RouteConstants',
