@@ -15,7 +15,10 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b")
+@NamedQueries({
+	@NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b"),
+	@NamedQuery(name="Bill.findById", query="SELECT b FROM Bill b WHERE b.billId = :billId")
+})
 @XmlRootElement
 public class Bill implements Serializable {
 	private static final long serialVersionUID = 1L;

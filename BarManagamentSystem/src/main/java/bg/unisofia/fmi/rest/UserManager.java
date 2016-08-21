@@ -20,6 +20,7 @@ import bg.unisofia.fmi.dao.UserDAO;
 import bg.unisofia.fmi.enums.Role;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
 import bg.unisofia.fmi.models.Bill;
+import bg.unisofia.fmi.models.Order;
 import bg.unisofia.fmi.models.User;
 
 @Stateless
@@ -106,9 +107,13 @@ public class UserManager {
 	 @Path("/orders")
 	 @POST
 	 @Consumes(MediaType.APPLICATION_JSON)
-	 public Response addOrder(Bill bill) {
-		 
-		 return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+	 public Response addOrder(Order order) {
+		 try {
+			 billDAO.addOrder(order);
+			 return Response.status(Response.Status.CREATED).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+		}
 	 }
 	 
 	 @Path("/orders/{billId}")

@@ -9,7 +9,7 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
             getStartedBills: getStartedBills,
             startBill: startBill,
             getOrdersForBill: getOrdersForBill,
-            addOrders: addOrders
+            addOrder: addOrder
         };
 
         return serviceAPI; 
@@ -36,23 +36,30 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
             });
         };
 
-        function _transformOrderDataForRequest(orders) {
-            // var modifiedOrders = [];
-            // orders.forEach((order, index) => {
-            //     for (var i = 0; i < order.quantity; i++) {
-            //         modifiedOrders.push({name: order.name});
-            //     }
-            // });
+        function _transformOrderDataForRequest(bill, orderItems) {
+            var data = {
+                order: {
+                    bill: {billId: bill.billId},
+                    items: []
+                }
+            }     
+
+            orderItems.forEach((item, index) => {
+                for (var i = 0; i < item.quantity; i++) {
+                    data.order.items.push({itemId: item.itemId});
+                }
+            });
+            return data;
         }
 
-        function addOrders(bill, orders) {
-            var data = {
-                bill: {
-                    billId: bill.billId,
-                    orders: _transformOrderDataForRequest(orders)
-                }
-            }
-            return $http.post(AppConstants.BASE_URL + "/orders", data, AppConstants.CONFIG)
+        function addOrder(bill, order) {
+            var data = _transformOrderDataForRequest(bill, order); 
+            debugger;
+            var config = {headers: { 
+                'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+            }}
+            return $http.post(AppConstants.BASE_URL + "/user/orders", data, config)
             .then((data) => {
                 debugger;
                 return $q.resolve(data);
@@ -63,7 +70,6 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
         }
 
         function getOrdersForBill(bill) {
-            debugger;
             return $http({
                 method: "GET",
                 url: AppConstants.BASE_URL + '/user/orders',

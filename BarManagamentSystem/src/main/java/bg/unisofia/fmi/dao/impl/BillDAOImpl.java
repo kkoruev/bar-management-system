@@ -1,5 +1,7 @@
 package bg.unisofia.fmi.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Singleton;
@@ -8,8 +10,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.BillDAO;
+import bg.unisofia.fmi.enums.Status;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
 import bg.unisofia.fmi.models.Bill;
+import bg.unisofia.fmi.models.Item;
 import bg.unisofia.fmi.models.Order;
 import bg.unisofia.fmi.models.User;
 
@@ -50,9 +54,24 @@ public class BillDAOImpl implements BillDAO {
 	}
 
 	@Override
-	public void addOrder(Bill bill) {
-		// TODO Auto-generated method stub
-		
+	public void addOrder(Order order) {
+		Order orderNew = new Order();
+		Bill bill = em.createNamedQuery("Bill.findById", Bill.class)
+				.setParameter("billId", order.getBill().getBillId())
+				.getSingleResult();
+		orderNew.setBill(bill);
+		orderNew.setCreatedAt(new Date());
+		orderNew.setStatus(Status.PENDING.name());
+		em.persist(orderNew);
+		List<Item> items = new ArrayList<>();
+		for (Item item : order.getItems()) {
+			Item i = em.createNamedQuery("Item.findById", Item.class)
+					.setParameter("itemId", item.getItemId())
+					.getSingleResult();
+			items.add(i);
+		}
+		orderNew.setItems(items);
+		em.persist(orderNew);
 	}
 
 	@Override

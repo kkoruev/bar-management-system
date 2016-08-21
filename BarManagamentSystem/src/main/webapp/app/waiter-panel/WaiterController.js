@@ -5,12 +5,12 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
         
         $scope.billName;
         $scope.bills;
-        $scope.currentBill = {};
+        $scope.openedBill = {};
         $scope.items;
         $scope.selectedItem = {};
 
         $scope.previousOrdersGrid = [{name: "potatoes",quantity: 3,price: 4.7},{name: "Pizza Palermo",quantity: 2,price: 7.8}];
-        $scope.newOrdersGrid = [];
+        $scope.newOrderGrid = [];
 
         init();
 
@@ -44,13 +44,12 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
 
 
         $scope.openBill = function(bill) {
-            $scope.currentBill = bill;
+            $scope.openedBill = bill;
+
             WaiterService.getOrdersForBill(bill)
             .then((data) => {
-                debugger;
             })
             .catch((error) => {
-                debugger;
             })
             if(bill.orders !== undefined) {
                 $scope.orders = bill.orders;
@@ -59,8 +58,10 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
             }
         }
 
+        // TODO: clear the input fields after adding an item
         $scope.addToOrder = function(selectedItem) {
-            $scope.newOrdersGrid.push({
+            $scope.newOrderGrid.push({
+                itemId: selectedItem.item.itemId,
                 name: selectedItem.item.name,
                 price: selectedItem.item.price,
                 quantity: selectedItem.quantity
@@ -68,7 +69,7 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
         }
 
         $scope.submitOrder = function() {
-            WaiterService.addOrders($scope.currentBill, $scope.newOrdersGrid)
+            WaiterService.addOrder($scope.openedBill, $scope.newOrderGrid)
             .then((data) => {
                 debugger
             })

@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 
@@ -25,6 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
+@XmlRootElement
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -52,14 +54,6 @@ public class Order implements Serializable {
 	@XmlTransient
 	private Bill bill;
 
-	public List<Item> getItems() {
-		return items;
-	}
-
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
-
 	@ManyToOne
 	@JoinColumn(name="taken_by_id")
 	private User user;
@@ -74,7 +68,7 @@ public class Order implements Serializable {
 	 			@JoinColumn(name="item_id")
 	 			}
 	 		)
-	 private List<Item> items;
+	private List<Item> items;
 	
 	public Order() {
 	}
@@ -133,6 +127,15 @@ public class Order implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 
 }

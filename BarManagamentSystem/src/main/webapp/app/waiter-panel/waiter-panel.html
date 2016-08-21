@@ -38,7 +38,7 @@
                     </button>
                 </div>
             </div>  
-            <div class="order-table" ng-show="newOrdersGrid.length > 0">
+            <div class="order-table" ng-show="newOrderGrid.length > 0">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -49,7 +49,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="new-items" ng-repeat="item in newOrdersGrid">
+                        <tr class="new-items" ng-repeat="item in newOrderGrid">
                             <th>{{item.name}}</th>
                             <th>{{item.quantity}}</th>
                             <th>{{item.price | number:2}}</th>
