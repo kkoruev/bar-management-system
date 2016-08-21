@@ -21,7 +21,7 @@ public class AuditManager {
 	
 	@GET
 	@Path("/income/month")
-	public Double getIncomeForMonth(Integer year,Integer monthNumber) {
+	public Double getIncomeFosrMonth(Integer year,Integer monthNumber) {
 		Date month  = new Date();
 		List<Order> ordersForMonth = orderDAO.getOrdersByDate(month);
 		Double price = 0.0;

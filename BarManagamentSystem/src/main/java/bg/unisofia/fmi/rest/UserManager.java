@@ -32,7 +32,7 @@ public class UserManager {
 
 	@EJB
 	BillDAO billDAO;
-	
+
 	@Inject
 	UserContextImpl userContext;
 
@@ -52,7 +52,7 @@ public class UserManager {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Role[] getRoles() {
-		//TODO: fix JSON response
+		// TODO: fix JSON response
 		return Role.values();
 	}
 
@@ -61,10 +61,9 @@ public class UserManager {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response loginUser(User user) {
 		try {
-			if (userDAO.authenticateUser(user.getUsername(),
-					user.getPassword())) {
-				userContext.setUser(userDAO.findByUsername(user
-						.getUsername()));
+			if (userDAO
+					.authenticateUser(user.getUsername(), user.getPassword())) {
+				userContext.setUser(userDAO.findByUsername(user.getUsername()));
 				return Response.ok().build();
 			}
 		} catch (Exception e) {
@@ -72,59 +71,66 @@ public class UserManager {
 		}
 		return Response.serverError().build();
 	}
-	
+
 	@Path("/bills")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createBill(Bill bill) {
-		try{
+		try {
 			billDAO.startBill(bill, userContext.getUser());
-		}
-		catch (InvalidUserException e) {
-			//TODO return 400 BAD REQEUST
+		} catch (InvalidUserException e) {
+			// TODO return 400 BAD REQEUST
 			return Response.serverError().build();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return Response.serverError().build();
 		}
 		return Response.ok().build();
 	}
-	
+
 	@Path("/bills/open")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Bill> getOpenBillsByUser(){
-		return billDAO.getOpenBillsByUser(userContext.getUser());
+	public List<Bill> getOpenBillsByUser() {
+		try {
+			List<Bill> bills = billDAO
+					.getOpenBillsByUser(userContext.getUser());
+		} catch (Exception ex) {
+			return null;
+		}
+		
+		return null;
 	}
 
-	 @Path("/role")
-	 @GET
-	 @Produces(MediaType.APPLICATION_JSON)
-	 public String getUserName() {
-		 return userContext.getUser().getRole();
-	 }
-	 
-	 @Path("/orders")
-	 @POST
-	 @Consumes(MediaType.APPLICATION_JSON)
-	 public Response addOrder(Order order) {
-		 try {
-			 billDAO.addOrder(order);
-			 return Response.status(Response.Status.CREATED).build();
+	@Path("/role")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getUserName() {
+		return userContext.getUser().getRole();
+	}
+
+	@Path("/orders")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addOrder(Order order) {
+		try {
+			billDAO.addOrder(order);
+			return Response.status(Response.Status.CREATED).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.build();
 		}
-	 }
-	 
-	 @Path("/orders/{billId}")
-	 @GET
-	 @Produces(MediaType.APPLICATION_JSON)
-	 public Response getOrders(@PathParam("billId") int billId) {
-		 try {
-			 return Response.ok().entity(billDAO.getOrders(billId)).build();
+	}
+
+	@Path("/orders/{billId}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getOrders(@PathParam("billId") int billId) {
+		try {
+			return Response.ok().entity(billDAO.getOrders(billId)).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.build();
 		}
-	 }
-	 
+	}
+
 }
