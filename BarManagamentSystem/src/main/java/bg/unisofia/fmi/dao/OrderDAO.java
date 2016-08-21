@@ -19,4 +19,6 @@ public interface OrderDAO {
 
 	public void completeOrders(String name);
 	
+	public List<Order> getAllOrders();
+	
 }

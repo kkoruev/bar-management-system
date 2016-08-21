@@ -40,6 +40,12 @@ public class OrderDAOImpl implements OrderDAO{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<Order> getAllOrders() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
