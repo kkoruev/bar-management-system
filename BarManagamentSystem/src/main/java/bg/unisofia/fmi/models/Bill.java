@@ -26,7 +26,6 @@ public class Bill implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="bill_id")
-	@XmlTransient
 	private int billId;
 
 	@Temporal(TemporalType.TIMESTAMP)

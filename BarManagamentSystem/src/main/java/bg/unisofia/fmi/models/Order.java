@@ -51,7 +51,6 @@ public class Order implements Serializable {
 	//bi-directional many-to-one association to Bill
 	@ManyToOne
 	@JoinColumn(name="bill_id")
-	@XmlTransient
 	private Bill bill;
 
 	@ManyToOne

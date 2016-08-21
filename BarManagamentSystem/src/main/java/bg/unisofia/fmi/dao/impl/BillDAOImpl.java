@@ -41,6 +41,7 @@ public class BillDAOImpl implements BillDAO {
 		if (user == null) { 
 			throw new InvalidUserException();
 		}
+		bill.setCreatedAt(new Date());
 		bill.setUser(user);
 		em.persist(bill);
 	}

@@ -4,8 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.enterprise.inject.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import bg.unisofia.fmi.dao.OrderDAO;
 import bg.unisofia.fmi.enums.Status;
@@ -20,8 +24,9 @@ public class AuditManager {
 	OrderDAO orderDAO;
 	
 	@GET
-	@Path("/income/month")
-	public Double getIncomeFosrMonth(Integer year,Integer monthNumber) {
+	@Path("/income")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Double getIncomeFosrMonth(@QueryParam("year") String year, @QueryParam("month") String monthNumber) {
 		Date month  = new Date();
 		List<Order> ordersForMonth = orderDAO.getOrdersByDate(month);
 		Double price = 0.0;
