@@ -29,7 +29,7 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
                     'Content-Type': 'application/json'
                 },
                 data: {
-                    "billDTO" : {
+                    "bill" : {
                         tableName: billName
                     }
                 }
