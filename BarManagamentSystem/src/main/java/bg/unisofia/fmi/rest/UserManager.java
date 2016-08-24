@@ -9,8 +9,8 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -20,7 +20,7 @@ import bg.unisofia.fmi.dao.UserDAO;
 import bg.unisofia.fmi.enums.Role;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
 import bg.unisofia.fmi.models.Bill;
-import bg.unisofia.fmi.models.Order;
+import bg.unisofia.fmi.models.OrderUnit;
 import bg.unisofia.fmi.models.User;
 
 @Stateless
@@ -61,8 +61,7 @@ public class UserManager {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response loginUser(User user) {
 		try {
-			if (userDAO
-					.authenticateUser(user.getUsername(), user.getPassword())) {
+			if (userDAO.authenticateUser(user.getUsername(), user.getPassword())) {
 				userContext.setUser(userDAO.findByUsername(user.getUsername()));
 				return Response.ok().build();
 			}
@@ -92,13 +91,11 @@ public class UserManager {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Bill> getOpenBillsByUser() {
 		try {
-			List<Bill> bills = billDAO
-					.getOpenBillsByUser(userContext.getUser());
+			return billDAO.getOpenBillsByUser(userContext.getUser());
 		} catch (Exception ex) {
 			return null;
 		}
 		
-		return null;
 	}
 
 	@Path("/role")
@@ -111,7 +108,7 @@ public class UserManager {
 	@Path("/orders")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addOrder(Order order) {
+	public Response addOrder(OrderUnit order) {
 		try {
 			billDAO.addOrder(order);
 			return Response.status(Response.Status.CREATED).build();
@@ -121,15 +118,14 @@ public class UserManager {
 		}
 	}
 
-	@Path("/orders/{billId}")
+	@Path("/orders")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getOrders(@PathParam("billId") int billId) {
+	public List<OrderUnit> getOrders(@QueryParam("billId") int billId) {
 		try {
-			return Response.ok().entity(billDAO.getOrders(billId)).build();
+			return billDAO.getOrders(billId);
 		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.build();
+			return null;
 		}
 	}
 

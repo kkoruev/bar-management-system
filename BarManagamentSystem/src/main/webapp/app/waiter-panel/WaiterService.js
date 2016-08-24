@@ -73,7 +73,7 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
             return $http({
                 method: "GET",
                 url: AppConstants.BASE_URL + '/user/orders',
-                headers: AppConstants.CONFIG,
+                headers: {"Accept": "application/json"},
                 params: {
                     billId: bill.billId 
                 }

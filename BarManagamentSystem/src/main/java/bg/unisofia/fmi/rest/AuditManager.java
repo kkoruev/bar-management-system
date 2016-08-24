@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.inject.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,7 +14,7 @@ import bg.unisofia.fmi.dao.OrderDAO;
 import bg.unisofia.fmi.enums.Status;
 import bg.unisofia.fmi.models.Category;
 import bg.unisofia.fmi.models.Item;
-import bg.unisofia.fmi.models.Order;
+import bg.unisofia.fmi.models.OrderUnit;
 
 @Path("/audit")
 public class AuditManager {
@@ -28,9 +27,9 @@ public class AuditManager {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Double getIncomeFosrMonth(@QueryParam("year") String year, @QueryParam("month") String monthNumber) {
 		Date month  = new Date();
-		List<Order> ordersForMonth = orderDAO.getOrdersByDate(month);
+		List<OrderUnit> ordersForMonth = orderDAO.getOrdersByDate(month);
 		Double price = 0.0;
-		for (Order order : ordersForMonth) {
+		for (OrderUnit order : ordersForMonth) {
 			for (Item item : order.getItems()) {
 				price = price + item.getPrice();
 			}
@@ -39,9 +38,9 @@ public class AuditManager {
 	}
 
 	public Double getIncomeForItem(String itemName) {
-		List<Order> allOrders = orderDAO.getAllOrders();
+		List<OrderUnit> allOrders = orderDAO.getAllOrders();
 		Double income = 0.0;
-		for (Order order : allOrders) {
+		for (OrderUnit order : allOrders) {
 			for (Item item : order.getItems()) {
 				if (item.getName().equals(itemName)) {
 					income = income + item.getPrice();
@@ -51,11 +50,11 @@ public class AuditManager {
 		return income;
 	}
 
-	public Integer getCountOfLateOrders(Integer year,Integer monthNumber) {
+	public Integer getCountOfLateOrders(Integer year, Integer monthNumber) {
 		Date month = new Date();
 		int count = 0;
-		List<Order> ordersForMonth = orderDAO.getOrdersByDate(month);
-		for (Order order : ordersForMonth) {
+		List<OrderUnit> ordersForMonth = orderDAO.getOrdersByDate(month);
+		for (OrderUnit order : ordersForMonth) {
 			if (order.getStatus().equals(Status.OVERDUE)) {
 				count++;
 			}

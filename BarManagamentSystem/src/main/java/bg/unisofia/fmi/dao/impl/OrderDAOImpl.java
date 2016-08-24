@@ -5,14 +5,14 @@ import java.util.List;
 
 import bg.unisofia.fmi.dao.OrderDAO;
 import bg.unisofia.fmi.models.Item;
-import bg.unisofia.fmi.models.Order;
+import bg.unisofia.fmi.models.OrderUnit;
 import bg.unisofia.fmi.models.User;
 
 
 public class OrderDAOImpl implements OrderDAO{
 
 	@Override
-	public List<Order> getOrdersByDate(Date date) {
+	public List<OrderUnit> getOrdersByDate(Date date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -42,7 +42,7 @@ public class OrderDAOImpl implements OrderDAO{
 	}
 
 	@Override
-	public List<Order> getAllOrders() {
+	public List<OrderUnit> getAllOrders() {
 		// TODO Auto-generated method stub
 		return null;
 	}

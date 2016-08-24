@@ -28,8 +28,8 @@ public class Category implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Item
-//	@OneToMany(mappedBy="category")
-//	private List<Item> items;
+	@OneToMany(mappedBy="category")
+	private List<Item> items;
 
 	public Category() {
 	}
@@ -50,26 +50,26 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-//	public List<Item> getItems() {
-//		return this.items;
-//	}
-//
-//	public void setItems(List<Item> items) {
-//		this.items = items;
-//	}
+	public List<Item> getItems() {
+		return this.items;
+	}
 
-//	public Item addItem(Item item) {
-//		getItems().add(item);
-//		item.setCategory(this);
-//
-//		return item;
-//	}
-//
-//	public Item removeItem(Item item) {
-//		getItems().remove(item);
-//		item.setCategory(null);
-//
-//		return item;
-//	}
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+	public Item addItem(Item item) {
+		getItems().add(item);
+		item.setCategory(this);
+
+		return item;
+	}
+
+	public Item removeItem(Item item) {
+		getItems().remove(item);
+		item.setCategory(null);
+
+		return item;
+	}
 
 }

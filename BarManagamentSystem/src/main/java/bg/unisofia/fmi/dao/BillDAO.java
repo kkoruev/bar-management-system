@@ -3,7 +3,7 @@ package bg.unisofia.fmi.dao;
 import java.util.List;
 
 import bg.unisofia.fmi.models.Bill;
-import bg.unisofia.fmi.models.Order;
+import bg.unisofia.fmi.models.OrderUnit;
 import bg.unisofia.fmi.models.User;
 
 public interface BillDAO {
@@ -14,9 +14,9 @@ public interface BillDAO {
 	
 	float endBill();
 
-	List<Order> getOrders(int billId);
+	List<OrderUnit> getOrders(int billId);
 
-	void addOrder(Order order);
+	void addOrder(OrderUnit order);
 
 
 	

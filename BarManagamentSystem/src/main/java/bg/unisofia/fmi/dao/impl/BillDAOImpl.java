@@ -14,7 +14,7 @@ import bg.unisofia.fmi.enums.Status;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
 import bg.unisofia.fmi.models.Bill;
 import bg.unisofia.fmi.models.Item;
-import bg.unisofia.fmi.models.Order;
+import bg.unisofia.fmi.models.OrderUnit;
 import bg.unisofia.fmi.models.User;
 
 @Singleton
@@ -47,28 +47,22 @@ public class BillDAOImpl implements BillDAO {
 	}
 	
 	@Override
-	public List<Order> getOrders(int billId) {
-		String txtQuery = "SELECT b FROM Bill b WHERE b.billId = :billId";
-		TypedQuery<Bill> getBillsQuery = em.createQuery(txtQuery, Bill.class);
-		getBillsQuery.setParameter("billId", billId);
-		return getBillsQuery.getSingleResult().getOrders(); 
+	public List<OrderUnit> getOrders(int billId) {
+		Bill bill = em.find(Bill.class, billId);
+		return bill.getOrderUnits();
 	}
 
 	@Override
-	public void addOrder(Order order) {
-		Order orderNew = new Order();
-		Bill bill = em.createNamedQuery("Bill.findById", Bill.class)
-				.setParameter("billId", order.getBill().getBillId())
-				.getSingleResult();
+	public void addOrder(OrderUnit order) {
+		OrderUnit orderNew = new OrderUnit();
+		Bill bill = em.find(Bill.class, order.getBill().getBillId());
 		orderNew.setBill(bill);
 		orderNew.setCreatedAt(new Date());
 		orderNew.setStatus(Status.PENDING.name());
 		em.persist(orderNew);
 		List<Item> items = new ArrayList<>();
 		for (Item item : order.getItems()) {
-			Item i = em.createNamedQuery("Item.findById", Item.class)
-					.setParameter("itemId", item.getItemId())
-					.getSingleResult();
+			Item i = em.find(Item.class,item.getItemId());
 			items.add(i);
 		}
 		orderNew.setItems(items);

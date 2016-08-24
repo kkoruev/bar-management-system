@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import bg.unisofia.fmi.models.Item;
-import bg.unisofia.fmi.models.Order;
+import bg.unisofia.fmi.models.OrderUnit;
 import bg.unisofia.fmi.models.User;
 
 public interface OrderDAO {
 	
-	public List<Order> getOrdersByDate(Date date);
+	public List<OrderUnit> getOrdersByDate(Date date);
 
 	public void createNewOrder(String name);
 
@@ -19,6 +19,6 @@ public interface OrderDAO {
 
 	public void completeOrders(String name);
 	
-	public List<Order> getAllOrders();
+	public List<OrderUnit> getAllOrders();
 	
 }

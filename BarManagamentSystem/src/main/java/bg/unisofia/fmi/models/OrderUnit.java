@@ -1,39 +1,24 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-
-/**
- * The persistent class for the order database table.
- * 
- */
 @Entity
-@NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
+@Table(name="order_unit")
+@NamedQuery(name="OrderUnit.findAll", query="SELECT o FROM OrderUnit o")
 @XmlRootElement
-public class Order implements Serializable {
+public class OrderUnit implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="order_id")
-	@XmlTransient
 	private int orderId;
 
 	private String comment;
@@ -53,23 +38,20 @@ public class Order implements Serializable {
 	@JoinColumn(name="bill_id")
 	private Bill bill;
 
+	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="taken_by_id")
 	private User user;
 
 	@ManyToMany
-	 	@JoinTable(
-	 		name="order_item"
-	 		, joinColumns={
-	 			@JoinColumn(name="order_id")
-	 			}
-	 		, inverseJoinColumns={
-	 			@JoinColumn(name="item_id")
-	 			}
-	 		)
+	@JoinTable(
+	 	name="order_item", 
+	 	joinColumns={@JoinColumn(name="order_id")},
+	 	inverseJoinColumns={@JoinColumn(name="item_id")}
+	)
 	private List<Item> items;
-	
-	public Order() {
+
+	public OrderUnit() {
 	}
 
 	public int getOrderId() {
@@ -128,7 +110,6 @@ public class Order implements Serializable {
 		this.user = user;
 	}
 	
-
 	public List<Item> getItems() {
 		return items;
 	}
@@ -136,5 +117,6 @@ public class Order implements Serializable {
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
+
 
 }

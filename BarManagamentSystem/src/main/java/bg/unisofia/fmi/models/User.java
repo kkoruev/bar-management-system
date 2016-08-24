@@ -40,14 +40,13 @@ public class User implements Serializable {
 	private String username;
 
 	//bi-directional many-to-one association to Bill
-	@XmlTransient
 	@OneToMany(mappedBy="user")
 	private List<Bill> bills;
 
-	//bi-directional many-to-one association to Order
+//	//bi-directional many-to-one association to Order
 	@XmlTransient
 	@OneToMany(mappedBy="user")
-	private List<Order> orders;
+	private List<OrderUnit> orderUnits;
 	
 	@Transient
 	private String password;
@@ -133,26 +132,26 @@ public class User implements Serializable {
 		return bill;
 	}
 
-	public List<Order> getOrders() {
-		return this.orders;
+	public List<OrderUnit> getOrderUnits() {
+		return this.orderUnits;
 	}
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+	public void setOrderUnits(List<OrderUnit> orderUnits) {
+		this.orderUnits = orderUnits;
 	}
 
-	public Order addOrder(Order order) {
-		getOrders().add(order);
-		order.setUser(this);
+	public OrderUnit addOrderUnit(OrderUnit orderUnit) {
+		getOrderUnits().add(orderUnit);
+		orderUnit.setUser(this);
 
-		return order;
+		return orderUnit;
 	}
 
-	public Order removeOrder(Order order) {
-		getOrders().remove(order);
-		order.setUser(null);
+	public OrderUnit removeOrderUnit(OrderUnit orderUnit) {
+		getOrderUnits().remove(orderUnit);
+		orderUnit.setUser(null);
 
-		return order;
+		return orderUnit;
 	}
 
 }
