@@ -224,3 +224,9 @@ h3 {
 .chart {
 	margin: 40px;	
 }
+
+.grand-total {
+    color: #343434;
+    font-size: 1.2em;
+    font-weight: bold;
+}

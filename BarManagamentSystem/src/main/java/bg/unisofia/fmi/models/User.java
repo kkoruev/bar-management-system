@@ -19,7 +19,6 @@ import java.util.List;
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@XmlTransient
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_id")
@@ -27,11 +26,9 @@ public class User implements Serializable {
 
 	private String name;
 
-	@XmlTransient
 	@Column(name="password_hash")
 	private String passwordHash;
 
-	@XmlTransient
 	@Column(name="password_salt")
 	private String passwordSalt;
 
@@ -44,7 +41,6 @@ public class User implements Serializable {
 	private List<Bill> bills;
 
 //	//bi-directional many-to-one association to Order
-	@XmlTransient
 	@OneToMany(mappedBy="user")
 	private List<OrderUnit> orderUnits;
 	
@@ -61,7 +57,8 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	@XmlTransient
 	public int getUserId() {
 		return this.userId;
 	}
@@ -78,6 +75,7 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
+	@XmlTransient
 	public String getPasswordHash() {
 		return this.passwordHash;
 	}
@@ -85,7 +83,8 @@ public class User implements Serializable {
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
-
+	
+	@XmlTransient
 	public String getPasswordSalt() {
 		return this.passwordSalt;
 	}
@@ -131,7 +130,8 @@ public class User implements Serializable {
 
 		return bill;
 	}
-
+	
+	@XmlTransient
 	public List<OrderUnit> getOrderUnits() {
 		return this.orderUnits;
 	}

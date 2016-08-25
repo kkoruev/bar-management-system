@@ -9,7 +9,7 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
         $scope.items;
         $scope.selectedItem = {};
 
-        $scope.previousOrdersGrid = [{name: "potatoes",quantity: 3,price: 4.7},{name: "Pizza Palermo",quantity: 2,price: 7.8}];
+        $scope.previousOrdersGrid = [];
         $scope.newOrderGrid = [];
 
         init();
@@ -28,6 +28,13 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
             });
         }
 
+        $scope.isBillOpened = function() {
+            if(Object.keys($scope.openedBill).length === 0) {
+                return false;
+            }
+            return true;
+        }
+
         $scope.startBill = function(billName) {
             var testBill = "mm";
             WaiterService.startBill(testBill)
@@ -42,13 +49,19 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
             })
         } 
 
+        $scope.getGrandTotal = function(gridData) {
+            var total = 0;
+            gridData.forEach((item, index) => {
+                total += item.quantity * item.price;
+            });
+            return total;
+        }
 
         $scope.openBill = function(bill) {
             $scope.openedBill = bill;
 
             WaiterService.getOrdersForBill(bill)
             .then((data) => {
-                
                 $scope.previousOrdersGrid = data;
             })
             .catch((error) => {

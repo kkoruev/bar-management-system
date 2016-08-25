@@ -68,18 +68,12 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
         }
 
         function getOrdersForBill(bill) {
-            return $http({
-                method: "GET",
-                url: AppConstants.BASE_URL + '/user/orders/items',
-                headers: {"Accept": "application/json"},
-                params: {
-                    billId: bill.billId 
-                }
-            })
+            var config = {headers: {"Accept" : "application/json"}};
+            return $http.get(AppConstants.BASE_URL + "/user/bills/" + bill.billId + "/orders", config)
             .then((response) => {
                 debugger;
                 var items = response.data.item;
-                return $q.resolve(data);
+                return $q.resolve(items);
             })
             .catch((error) => {
                 return $q.reject(error);

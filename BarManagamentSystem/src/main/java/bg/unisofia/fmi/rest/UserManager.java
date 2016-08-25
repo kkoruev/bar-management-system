@@ -1,6 +1,5 @@
 package bg.unisofia.fmi.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,17 +11,16 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import bg.unisofia.fmi.context.impl.UserContextImpl;
 import bg.unisofia.fmi.dao.BillDAO;
 import bg.unisofia.fmi.dao.UserDAO;
+import bg.unisofia.fmi.dto.ItemDTO;
 import bg.unisofia.fmi.enums.Role;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
 import bg.unisofia.fmi.models.Bill;
-import bg.unisofia.fmi.models.Item;
 import bg.unisofia.fmi.models.OrderUnit;
 import bg.unisofia.fmi.models.User;
 
@@ -121,16 +119,13 @@ public class UserManager {
 		}
 	}
 
-	@Path("/orders/items")
+	@Path("bills/{billId}/orders")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Item> getOrders(@QueryParam("billId") int billId) {
+	public List<ItemDTO> getOrders(@PathParam("billId") int billId) {
 		try {
-			List<Item> items = new ArrayList<>();
-			for(OrderUnit order : billDAO.getOrders(billId)) {
-				items.addAll(order.getItems());
-			}
-			return items;
+			List<OrderUnit> orders =  billDAO.getOrders(billId);
+			return billDAO.getOrderedItems(orders);
 			
 		} catch (Exception e) {
 			return null;

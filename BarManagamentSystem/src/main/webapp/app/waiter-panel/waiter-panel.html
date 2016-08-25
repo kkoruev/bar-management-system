@@ -14,8 +14,10 @@
                 </div>
             </div>
         </header>
+    
         <div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
-            <div class="row search-bar">
+            <!-- add items to bill inputs -->
+            <div class="row search-bar" ng-if="isBillOpened()">
                 <div class="col-sm-6">
                     <input type="text" class="form-control" placeholder="Search items"
                     bs-options="item as item.name for item in items"
@@ -23,7 +25,6 @@
                     bs-typeahead
                     >
                 </div>
-                <!-- /.col-lg-6 -->
                 <div class="col-sm-2">
                     <input type="number" min="1" 
                         class="form-control" placeholder="Qty"
@@ -38,6 +39,7 @@
                     </button>
                 </div>
             </div>  
+
             <div class="order-table" ng-show="newOrderGrid.length > 0">
                 <table class="table table-hover">
                     <thead>
@@ -58,7 +60,12 @@
                     </tbody>
                 </table>
             </div>
-            <button type="submit" class="btm pull-right" ng-click="submitOrder()">Submit</button>
+            <button type="submit" 
+                    class="btm pull-right" 
+                    ng-click="submitOrder()"
+                    ng-show="newOrderGrid.length > 0"
+                    > Submit 
+            </button>
 
             <div class="order-table" ng-show="previousOrdersGrid.length > 0">
                 <table class="table table-hover">
@@ -79,9 +86,10 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="col-xs-12 col-sm-10"> 
-                <span class="pull-right">Grand Total: {{}}</span>
+
+                <div class="col-xs-12 col-sm-10"> 
+                    <span class="pull-right grand-total">Grand Total: {{getGrandTotal(previousOrdersGrid) | number:2}}  &#8364;</span>
+                </div>
             </div>
 
         </div>

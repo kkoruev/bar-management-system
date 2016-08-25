@@ -2,7 +2,9 @@ package bg.unisofia.fmi.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.BillDAO;
+import bg.unisofia.fmi.dto.ItemDTO;
 import bg.unisofia.fmi.enums.Status;
 import bg.unisofia.fmi.exceptions.InvalidUserException;
 import bg.unisofia.fmi.models.Bill;
@@ -50,6 +53,31 @@ public class BillDAOImpl implements BillDAO {
 	public List<OrderUnit> getOrders(int billId) {
 		Bill bill = em.find(Bill.class, billId);
 		return bill.getOrderUnits();
+	}
+	
+	@Override
+	public List<ItemDTO> getOrderedItems(List<OrderUnit> orders) {
+		Map<String, ItemDTO> counterMap = new HashMap<>();
+		ItemDTO itemDTO;
+		List<Item> items = new ArrayList<>();
+		
+		for(OrderUnit order : orders) {
+			items.addAll(order.getItems());
+		}
+		
+		for(Item item : items) {
+			if(counterMap.containsKey(item.getName())) {
+				itemDTO = counterMap.get(item.getName());
+				itemDTO.setQuantity(itemDTO.getQuantity() + 1);
+			} else {
+				itemDTO = new ItemDTO();
+				itemDTO.setName(item.getName());
+				itemDTO.setQuantity(1);
+				itemDTO.setPrice(item.getPrice());
+				counterMap.put(item.getName(), itemDTO);
+			}
+		}
+		return new ArrayList<ItemDTO>(counterMap.values());
 	}
 
 	@Override
