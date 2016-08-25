@@ -25,16 +25,21 @@ public class AuditManager {
 	@GET
 	@Path("/income")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Double getIncomeFosrMonth(@QueryParam("year") String year, @QueryParam("month") String monthNumber) {
-		Date month  = new Date();
-		List<OrderUnit> ordersForMonth = orderDAO.getOrdersByDate(month);
-		Double price = 0.0;
-		for (OrderUnit order : ordersForMonth) {
-			for (Item item : order.getItems()) {
-				price = price + item.getPrice();
+	public Double[] getIncomeFosrMonth(@QueryParam("year") String year) {
+		Double[] monthsIncome = new Double[12];
+		
+		for(int month = 1; month <= 12; month++ ){
+			List<OrderUnit> ordersForMonth = orderDAO.getOrdersForMonth(month);
+			Double price = 0.0;
+			for(OrderUnit order : ordersForMonth) {
+				for(Item item : order.getItems()) {
+					price = price + item.getPrice();
+				}
 			}
+			monthsIncome[month] = price;
 		}
-		return price;
+		
+		return monthsIncome;
 	}
 
 	public Double getIncomeForItem(String itemName) {
