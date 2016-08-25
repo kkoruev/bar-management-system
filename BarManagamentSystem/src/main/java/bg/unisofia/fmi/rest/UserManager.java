@@ -91,7 +91,8 @@ public class UserManager {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Bill> getOpenBillsByUser() {
 		try {
-			return billDAO.getOpenBillsByUser(userContext.getUser());
+			List<Bill> bills = billDAO.getOpenBillsByUser(userContext.getUser()); 
+			return bills;
 		} catch (Exception ex) {
 			return null;
 		}
@@ -113,8 +114,7 @@ public class UserManager {
 			billDAO.addOrder(order);
 			return Response.status(Response.Status.CREATED).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-					.build();
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 

@@ -38,7 +38,7 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
 
         function _transformOrderDataForRequest(bill, orderItems) {
             var data = {
-                order: {
+                orderUnit: {
                     bill: {billId: bill.billId},
                     items: []
                 }
@@ -46,7 +46,7 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
 
             orderItems.forEach((item, index) => {
                 for (var i = 0; i < item.quantity; i++) {
-                    data.order.items.push({itemId: item.itemId});
+                    data.orderUnit.items.push({itemId: item.itemId});
                 }
             });
             return data;
@@ -54,7 +54,6 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
 
         function addOrder(bill, order) {
             var data = _transformOrderDataForRequest(bill, order); 
-            debugger;
             var config = {headers: { 
                 'Accept': 'application/json',
                 'Content-Type': 'application/json' 

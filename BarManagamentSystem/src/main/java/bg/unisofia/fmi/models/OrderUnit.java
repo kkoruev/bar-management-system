@@ -1,12 +1,25 @@
 package bg.unisofia.fmi.models;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 @Entity
@@ -36,6 +49,7 @@ public class OrderUnit implements Serializable {
 	//bi-directional many-to-one association to Bill
 	@ManyToOne
 	@JoinColumn(name="bill_id")
+	@XmlTransient
 	private Bill bill;
 
 	//bi-directional many-to-one association to User
@@ -43,7 +57,7 @@ public class OrderUnit implements Serializable {
 	@JoinColumn(name="taken_by_id")
 	private User user;
 
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 	 	name="order_item", 
 	 	joinColumns={@JoinColumn(name="order_id")},
