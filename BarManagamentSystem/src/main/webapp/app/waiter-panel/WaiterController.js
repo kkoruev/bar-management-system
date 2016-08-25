@@ -48,6 +48,8 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
 
             WaiterService.getOrdersForBill(bill)
             .then((data) => {
+                
+                $scope.previousOrdersGrid = data;
             })
             .catch((error) => {
             })

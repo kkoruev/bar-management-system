@@ -16,8 +16,6 @@ public interface BillDAO {
 
 	List<OrderUnit> getOrders(int billId);
 
-	void addOrder(OrderUnit order);
+	void addOrder(int billId, OrderUnit order);
 
-
-	
 }

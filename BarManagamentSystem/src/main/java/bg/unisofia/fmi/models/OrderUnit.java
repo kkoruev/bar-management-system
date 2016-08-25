@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,7 +50,6 @@ public class OrderUnit implements Serializable {
 	//bi-directional many-to-one association to Bill
 	@ManyToOne
 	@JoinColumn(name="bill_id")
-	@XmlTransient
 	private Bill bill;
 
 	//bi-directional many-to-one association to User
@@ -57,7 +57,7 @@ public class OrderUnit implements Serializable {
 	@JoinColumn(name="taken_by_id")
 	private User user;
 
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	 	name="order_item", 
 	 	joinColumns={@JoinColumn(name="order_id")},
@@ -108,6 +108,7 @@ public class OrderUnit implements Serializable {
 		this.status = status;
 	}
 
+	@XmlTransient
 	public Bill getBill() {
 		return this.bill;
 	}

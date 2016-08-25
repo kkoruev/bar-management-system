@@ -53,9 +53,9 @@ public class BillDAOImpl implements BillDAO {
 	}
 
 	@Override
-	public void addOrder(OrderUnit order) {
+	public void addOrder(int billId, OrderUnit order) {
 		OrderUnit orderNew = new OrderUnit();
-		Bill bill = em.find(Bill.class, order.getBill().getBillId());
+		Bill bill = em.find(Bill.class, billId);
 		orderNew.setBill(bill);
 		orderNew.setCreatedAt(new Date());
 		orderNew.setStatus(Status.PENDING.name());

@@ -39,7 +39,6 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
         function _transformOrderDataForRequest(bill, orderItems) {
             var data = {
                 orderUnit: {
-                    bill: {billId: bill.billId},
                     items: []
                 }
             }     
@@ -58,7 +57,7 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
                 'Accept': 'application/json',
                 'Content-Type': 'application/json' 
             }}
-            return $http.post(AppConstants.BASE_URL + "/user/orders", data, config)
+            return $http.post(AppConstants.BASE_URL + "/user/bills/" + bill.billId + "/orders", data, config)
             .then((data) => {
                 debugger;
                 return $q.resolve(data);
@@ -71,13 +70,15 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
         function getOrdersForBill(bill) {
             return $http({
                 method: "GET",
-                url: AppConstants.BASE_URL + '/user/orders',
+                url: AppConstants.BASE_URL + '/user/orders/items',
                 headers: {"Accept": "application/json"},
                 params: {
                     billId: bill.billId 
                 }
             })
-            .then((data) => {
+            .then((response) => {
+                debugger;
+                var items = response.data.item;
                 return $q.resolve(data);
             })
             .catch((error) => {
