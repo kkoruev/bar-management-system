@@ -3,7 +3,9 @@ app.constant('RouteConstants', {
     WAITER_ORDERS: 'waiter-panel',
     BARTENDER_ORDERS: 'bartender-panel',
     REGISTER_USER: 'register-user',
-    MANAGE_ITEMS: 'manage-items'
+    MANAGE_ITEMS: 'manage-items',
+    STATISTICS_VIEW: 'statistics-view'
+    	
 });
 
 app.constant('AppConstants', {

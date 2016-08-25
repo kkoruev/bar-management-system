@@ -211,3 +211,16 @@ h3 {
             user-select: none;
     cursor: default;
 }
+
+/* css for register-user html page */
+
+.statistics-list li
+{
+	cursor: pointer;
+	margin-top: 20px;
+	padding-left: 15px;
+}
+
+.chart {
+	margin: 40px;	
+}

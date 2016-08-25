@@ -7,7 +7,8 @@ var app = angular.module('BarManagementSystem', [
     'ui.router',
     'toastr',
     'ngAnimate',
-    'mgcrea.ngStrap' 
+    'mgcrea.ngStrap',
+    'ng-fusioncharts'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', 'RouteConstants',
@@ -27,6 +28,11 @@ app.config(['$stateProvider', '$urlRouterProvider', 'RouteConstants',
             url: '/register-user',
             templateUrl: 'app/admin-panel/register-user/register-user.html',
             controller: 'RegisterUserController'
+        })
+        .state(RouteConstants.STATISTICS_VIEW, {
+            url: '/statistics-view',
+            templateUrl: 'app/admin-panel/statistics-view/statistics-view.html',
+            controller: 'StatisticsViewController'
         })
         .state(RouteConstants.MANAGE_ITEMS, {
             url: '/manage-items',
