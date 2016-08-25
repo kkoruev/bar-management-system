@@ -1,0 +1,23 @@
+<div class="container-fluid">
+	<div class="row">
+		<div ng-include="'app/admin-panel/navbar-admin/navbar-admin.html'"></div>
+		<div id="main-content" class="col-sm-9 col-sm-offset-3 col-xs-12">
+			<ul class="nav nav-tabs statistics-list">
+				<li role="presentation" ng-click="selection='diagram1'"><a>Last year profit</a></li>
+				<li role="presentation" ng-click="selection='diagram2'"><a>Last week late orders</a></li>
+				<li role="presentation" ng-click="selection='diagram3'"><a>Last day statistic</a></li>
+			</ul>
+
+			<div ng-switch on="selection">
+				<div fusioncharts ng-switch-when="diagram1" class="chart" 
+					width="800" height="500" type="column2d"
+					datasource="{{dataSource}}">
+				</div>
+				<div fusioncharts ng-switch-when="diagram2" class="chart"
+					 width="800" height="500" type="line" dataSource="{{dataSource}}">
+				</div>	
+					
+			</div>
+		</div>
+	</div>
+</div>
