@@ -6,7 +6,6 @@ app.controller("StatisticsViewController", [ '$scope', 'StatisticsViewService',
 	$scope.getWaiterBillsStatistics = function() {
 		StatisticsViewService.getWaiterBillsForLastWeek()
 		.then((statisticsData) => {
-			debugger;
 			$scope.dataSource.data = statisticsData;
 		})
 		.catch((error) => {
