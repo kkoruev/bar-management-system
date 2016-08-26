@@ -40,13 +40,14 @@ public class BillDAOImpl implements BillDAO {
 	}
 	
 	@Override
-	public void startBill(Bill bill, User user) {
+	public Bill startBill(Bill bill, User user) {
 		if (user == null) { 
 			throw new InvalidUserException();
 		}
 		bill.setCreatedAt(new Date());
 		bill.setUser(user);
 		em.persist(bill);
+		return bill;
 	}
 	
 	@Override
@@ -81,7 +82,7 @@ public class BillDAOImpl implements BillDAO {
 	}
 
 	@Override
-	public void addOrder(int billId, OrderUnit order) {
+	public OrderUnit addOrder(int billId, OrderUnit order) {
 		OrderUnit orderNew = new OrderUnit();
 		Bill bill = em.find(Bill.class, billId);
 		orderNew.setBill(bill);
@@ -95,6 +96,7 @@ public class BillDAOImpl implements BillDAO {
 		}
 		orderNew.setItems(items);
 		em.persist(orderNew);
+		return orderNew;
 	}
 
 	@Override

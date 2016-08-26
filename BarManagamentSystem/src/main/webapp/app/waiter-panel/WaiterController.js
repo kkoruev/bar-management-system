@@ -16,15 +16,15 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
 
         function init() {
             return WaiterService.getStartedBills()
-            .then((data) => {
-                $scope.bills = data.data.bill;
+            .then((bills) => {
+                $scope.bills = bills;
                 return ManageItemsService.getItems();
             })
             .then((items) => {
                 $scope.items = items;
             })
             .catch((error) => {
-                console.log(error);
+                toastr.error("Error on getting opened bills " + error);
             });
         }
 
@@ -36,16 +36,13 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
         }
 
         $scope.startBill = function(billName) {
-            var testBill = "mm";
-            WaiterService.startBill(testBill)
-            .then((data) => {
-
-                console.log('data');
-                // TODO: redirect to add items to order
+            WaiterService.startBill(billName)
+            .then((bill) => {
+                $scope.bills.push(bill);
+                $scope.openedBill = bill;
             })
             .catch((error) => {
-                console.log(error);
-                //TODO: add error handling
+                toastr.error("Unable to start a bill " + error);
             })
         } 
 

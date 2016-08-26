@@ -11,13 +11,13 @@ public interface BillDAO {
 	
 	List<Bill> getOpenBillsByUser(User user);
 	
-	void startBill(Bill bill, User user);
+	Bill startBill(Bill bill, User user);
 	
 	float endBill();
 
 	List<OrderUnit> getOrders(int billId);
 
-	void addOrder(int billId, OrderUnit order);
+	OrderUnit addOrder(int billId, OrderUnit order);
 
 	List<ItemDTO> getOrderedItems(List<OrderUnit> orders);
 

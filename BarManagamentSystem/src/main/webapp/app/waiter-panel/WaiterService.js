@@ -15,25 +15,24 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
         return serviceAPI; 
         
         function getStartedBills() {
-            return $http({
-                method: "GET",
-                url: baseURL + '/bills/open',
+            return $http.get(AppConstants.BASE_URL + "/user/bills/open")
+            .then((data) => {
+                return $q.resolve(data.data.bill);
+            })
+            .catch((error) => {
+                return $q.reject(error);
             });
         }
 
         function startBill(billName) {
-            return $http({
-                method: "POST",
-                url: baseURL + '/bills',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: {
-                    "bill" : {
-                        tableName: billName
-                    }
-                }
-            });
+            var data = {"bill": {tableName: billName}};
+            return $http.post(AppConstants.BASE_URL + "/user/bills", data, {headers: {'Content-Type': 'application/json'}})
+            .then((data) => {
+                return $q.resolve(data.data.bill);
+            })
+            .catch((error) => {
+                return $q.reject(error);
+            })
         };
 
         function _transformOrderDataForRequest(bill, orderItems) {

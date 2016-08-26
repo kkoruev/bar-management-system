@@ -77,14 +77,13 @@ public class UserManager {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createBill(Bill bill) {
 		try {
-			billDAO.startBill(bill, userContext.getUser());
+			Bill persistedBill = billDAO.startBill(bill, userContext.getUser());
+			return Response.status(Response.Status.CREATED).entity(persistedBill).build();
 		} catch (InvalidUserException e) {
-			// TODO return 400 BAD REQEUST
-			return Response.serverError().build();
+			return Response.status(Response.Status.BAD_REQUEST).build();
 		} catch (Exception e) {
 			return Response.serverError().build();
 		}
-		return Response.ok().build();
 	}
 
 	@Path("/bills/open")
