@@ -55,7 +55,6 @@ public class UserManager {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Role[] getRoles() {
-		// TODO: fix JSON response
 		return Role.values();
 	}
 	

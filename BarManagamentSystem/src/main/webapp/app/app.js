@@ -55,8 +55,8 @@ app.config(function(toastrConfig) {
         newestOnTop: true,
         positionClass: 'toast-bottom-center',
         target: 'body',
-        timeOut: 3500,
-        extendedTimeOut: 2000,
+        timeOut: 4000,
+        extendedTimeOut: 3000,
         tapToDismiss: true
     });
 });
