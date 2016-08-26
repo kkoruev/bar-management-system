@@ -11,7 +11,7 @@ app.controller('ManageItemsController', [
 
         function getCategories() {
             ManageItemsService.getCategories()
-            .then(function(data) {
+            .then((data) => {
                 $scope.categories = data.data.category;
             })
             .catch((error) => {
@@ -23,11 +23,9 @@ app.controller('ManageItemsController', [
             return ManageItemsService.addItem(item)
             .then((data) => {
                 toastr.success("Item successfully added");
-                console.log(data);
             })
             .catch((error) => {
                 toastr.error("Error on adding new idem");
-                console.log(error);
             })
             .finally(() => {
                addItemForm.$setPristine();
