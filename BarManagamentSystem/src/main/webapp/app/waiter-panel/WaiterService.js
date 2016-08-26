@@ -9,7 +9,8 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
             getStartedBills: getStartedBills,
             startBill: startBill,
             getOrdersForBill: getOrdersForBill,
-            addOrder: addOrder
+            addOrder: addOrder,
+            completeBill: completeBill
         };
 
         return serviceAPI; 
@@ -75,6 +76,10 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
             .catch((error) => {
                 return $q.reject(error);
             })
+        }
+
+        function completeBill(bill) {
+            return $http.put(AppConstants.BASE_URL + "/user/bills/" + bill.billId + "/complete");
         }
 
 

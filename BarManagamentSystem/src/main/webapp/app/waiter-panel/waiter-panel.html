@@ -61,7 +61,7 @@
                 </table>
             </div>
             <button type="submit" 
-                    class="btm pull-right" 
+                    class="btn pull-right" 
                     ng-click="submitOrder()"
                     ng-show="newOrderGrid.length > 0"
                     > Submit 
@@ -90,6 +90,12 @@
                 <div class="col-xs-12 col-sm-10"> 
                     <span class="pull-right grand-total">Grand Total: {{getGrandTotal(previousOrdersGrid) | number:2}}  &#8364;</span>
                 </div>
+                <button type="submit" 
+                    class="btn pull-right" 
+                    ng-click="completeBill()"
+                    ng-show="previousOrdersGrid.length > 0"
+                    > Complete Bill 
+                </button>
             </div>
 
         </div>

@@ -93,6 +93,24 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
             })
         }
 
+        $scope.completeBill = function() {
+            WaiterService.completeBill($scope.openedBill)
+            .then(() => {
+                toastr.info("GRAND TOTAL: " + $scope.getGrandTotal($scope.previousOrdersGrid) + " €");
+                for (var i = $scope.bills.length - 1; i >= 0; i--) {
+                    if($scope.bills[i].billId === $scope.openedBill.billId) {
+                        $scope.bills.splice(i, 1);
+                        break;
+                    }
+                }
+                $scope.previousOrdersGrid = [];
+                $scope.openedBill = {};
+            })
+            .catch((error) => {
+                toastr.error(error);
+            })
+        }
+
         function mergeNewItemsWithPreviouslyAdded(existingItems, newItems) {
             var hasExisting;
             newItems.forEach((item, index) => {
