@@ -1,37 +1,25 @@
 'use strict';
 
-app.factory('StatisticsViewService', ['$http', 
-    function($http) {
+app.factory('StatisticsViewService', ['$http', 'AppConstants', '$q',
+    function($http, AppConstants, $q) {
     
-        var baseURL = 'http://localhost:8080/BarManagamentSystem/rest/audit';
-        
         var serviceAPI = {
-        	getWaiterBillsForLastWeek: getWaiterBillsForLastWeek,
-            getRoles: getRoles
+        	getWaiterBillsForLastWeek: getWaiterBillsForLastWeek
             
         };
         return serviceAPI;
         
-        function registerUser(registerInfo) {
-            $http({
-                method: 'POST',
-                url: baseURL + '/register',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: {"user" : registerInfo}
-            });
+        function getWaiterBillsForLastWeek() {
+        	var config = {headers: {'Content-Type': 'application/json'}};
+        	
+        	return $http.get(AppConstants.BASE_URL + '/audit/income/week', config)
+        	.then((response) => {
+        		return $q.resolve(response.data.waiterCounterBills);
+        	})
+        	.catch((error) => {
+        		return $q.reject(error);
+        	});
         }
         
-        function getRoles() {
-            return $http({
-                method: 'GET',
-                url: baseURL + '/roles',
-                headers: {
-                    'Content-Type' : 'application/json'
-                },
-                
-            });
-        }
     }
 ]);

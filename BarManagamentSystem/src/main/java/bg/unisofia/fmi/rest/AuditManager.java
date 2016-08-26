@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 import bg.unisofia.fmi.dao.BillDAO;
 import bg.unisofia.fmi.dao.OrderDAO;
 import bg.unisofia.fmi.dto.MonthIncomeDTO;
-import bg.unisofia.fmi.dto.WaiterStatisticsDTO;
+import bg.unisofia.fmi.dto.StatisticsDTO;
 import bg.unisofia.fmi.enums.Status;
 import bg.unisofia.fmi.models.Bill;
 import bg.unisofia.fmi.models.Category;
@@ -35,24 +35,24 @@ public class AuditManager {
 	@Path("/income/week")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<WaiterStatisticsDTO> getWaiterBillsForLastWeek() {		
-		Map<String, WaiterStatisticsDTO> waiterBills = new HashMap<>();		
+	public List<StatisticsDTO> getWaiterBillsForLastWeek() {		
+		Map<String, StatisticsDTO> waiterBills = new HashMap<>();		
 		List<Bill> allBillsForWeek = billDAO.getAllBillsForLastWeek();
 		
 		for(Bill bill : allBillsForWeek) {
-			WaiterStatisticsDTO waiterStatDTO = null;
+			StatisticsDTO waiterStatDTO = null;
 			if(waiterBills.containsKey(bill.getUser().getName())) {
 				waiterStatDTO = waiterBills.get(bill.getUser().getName());
-				waiterStatDTO.setCountBills(waiterStatDTO.getCountBills() + 1);
+				waiterStatDTO.setValue(waiterStatDTO.getValue() + 1);
 			} else {
-				waiterStatDTO = new WaiterStatisticsDTO();
-				waiterStatDTO.setUsername(bill.getUser().getName());
-				waiterStatDTO.setCountBills(1);
+				waiterStatDTO = new StatisticsDTO();
+				waiterStatDTO.setLabel(bill.getUser().getName());
+				waiterStatDTO.setValue(1.0);
 				waiterBills.put(bill.getUser().getName(), waiterStatDTO);
 			}
 		}
 		
-		return new ArrayList<WaiterStatisticsDTO>(waiterBills.values());
+		return new ArrayList<StatisticsDTO>(waiterBills.values());
 		
 	}
 	
