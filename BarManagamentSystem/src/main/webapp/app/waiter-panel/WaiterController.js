@@ -40,6 +40,8 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
             .then((bill) => {
                 $scope.bills.push(bill);
                 $scope.openedBill = bill;
+                $scope.openBill(bill);
+                billName = "";
             })
             .catch((error) => {
                 toastr.error("Unable to start a bill " + error);
@@ -70,7 +72,6 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
             }
         }
 
-        // TODO: clear the input fields after adding an item
         $scope.addToOrder = function(selectedItem) {
             $scope.newOrderGrid.push({
                 itemId: selectedItem.item.itemId,
@@ -78,16 +79,34 @@ app.controller('WaiterController', ['$scope', 'WaiterService', 'toastr', 'Manage
                 price: selectedItem.item.price,
                 quantity: selectedItem.quantity
             });
+            $scope.selectedItem = {};
         }
 
         $scope.submitOrder = function() {
             WaiterService.addOrder($scope.openedBill, $scope.newOrderGrid)
-            .then((data) => {
-                debugger
+            .then((items) => {
+                $scope.newOrderGrid = [];
+                mergeNewItemsWithPreviouslyAdded($scope.previousOrdersGrid, items);
             })
             .catch((error) => {
-                debugger;
+                toastr.error(error);
             })
+        }
+
+        function mergeNewItemsWithPreviouslyAdded(existingItems, newItems) {
+            var hasExisting;
+            newItems.forEach((item, index) => {
+                hasExisting = false;
+                existingItems.forEach((existing) => {
+                    if(existing.name === item.name) {
+                        existing.quantity += item.quantity;
+                        hasExisting = true; 
+                    } 
+                });
+                if(!hasExisting) {
+                    existingItems.push(item);
+                } 
+            });
         }
 
     }

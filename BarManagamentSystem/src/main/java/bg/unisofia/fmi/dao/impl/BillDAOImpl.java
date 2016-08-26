@@ -90,7 +90,6 @@ public class BillDAOImpl implements BillDAO {
 		orderNew.setBill(bill);
 		orderNew.setCreatedAt(new Date());
 		orderNew.setStatus(Status.PENDING.name());
-//		em.persist(orderNew);
 		List<Item> items = new ArrayList<>();
 		for (Item item : order.getItems()) {
 			Item i = em.find(Item.class ,item.getItemId());

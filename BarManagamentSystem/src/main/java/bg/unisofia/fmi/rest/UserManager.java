@@ -1,5 +1,6 @@
 package bg.unisofia.fmi.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -79,7 +80,29 @@ public class UserManager {
 		}
 		return Response.serverError().build();
 	}
+	
 
+//	@Path("/role")
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String getUserName() {
+//		return userContext.getUser().getRole();
+//	}
+
+
+	@Path("/bills/open")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Bill> getOpenBillsByUser() {
+		try {
+			List<Bill> bills = billDAO.getOpenBillsByUser(userContext.getUser()); 
+			return bills;
+		} catch (Exception ex) {
+			return null;
+		}
+		
+	}
+	
 	@Path("/bills")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -94,35 +117,17 @@ public class UserManager {
 		}
 	}
 
-	@Path("/bills/open")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Bill> getOpenBillsByUser() {
-		try {
-			List<Bill> bills = billDAO.getOpenBillsByUser(userContext.getUser()); 
-			return bills;
-		} catch (Exception ex) {
-			return null;
-		}
-		
-	}
-
-	@Path("/role")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getUserName() {
-		return userContext.getUser().getRole();
-	}
-
 	@Path("bills/{billId}/orders")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addOrder(@PathParam("billId") int billId, OrderUnit order) {
+	public List<ItemDTO> addOrder(@PathParam("billId") int billId, OrderUnit order) {
 		try {
-			billDAO.addOrder(billId, order);
-			return Response.status(Response.Status.CREATED).build();
+			OrderUnit persistedOrder = billDAO.addOrder(billId, order);
+			List<OrderUnit> orders = new ArrayList<>();
+			orders.add(persistedOrder);
+			return billDAO.getOrderedItems(orders);
 		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+			return null;
 		}
 	}
 
