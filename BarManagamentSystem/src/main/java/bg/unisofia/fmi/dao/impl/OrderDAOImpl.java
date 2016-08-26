@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.OrderDAO;
@@ -32,17 +33,19 @@ public class OrderDAOImpl implements OrderDAO{
 	@Override
 	public List<OrderUnit> getOrdersForMonth(Integer month)
 			throws ParseException {
-		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Calendar cal = Calendar.getInstance();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		String startMonth = "01-" + month + "-" + currentYear;
-		String endMonth = "31-" + month + "-" + currentYear;
+		String startMonth = currentYear + "-" + month + "-01";
+		String endMonth = currentYear + "-" + month + "-31";
 		Date startMonthDate = dateFormat.parse(startMonth);
 		Date endMonthDate = dateFormat.parse(endMonth);
+
 		String txtQuery = "SELECT o FROM OrderUnit o  WHERE o.completedAt BETWEEN :startDate and :endDate";
 		TypedQuery<OrderUnit> getOrdersForMonth = em
 				.createQuery(txtQuery, OrderUnit.class)
-				.setParameter("startDate", startMonthDate)
-				.setParameter("endDate", endMonthDate);
+				.setParameter("startDate", startMonthDate, TemporalType.DATE)
+				.setParameter("endDate", endMonthDate, TemporalType.DATE);
 
 		return getOrdersForMonth.getResultList();
 	}

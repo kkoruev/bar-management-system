@@ -1,6 +1,7 @@
 package bg.unisofia.fmi.rest;
 
 import java.text.ParseException;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -59,22 +60,24 @@ public class AuditManager {
 	@GET
 	@Path("/income/year")
 	@Produces(MediaType.APPLICATION_JSON)
-	public MonthIncomeDTO getIncomeForYear() throws ParseException {
-		List<Double> monthsIncome = new ArrayList<>();
+	public List<StatisticsDTO> getIncomeForYear() throws ParseException {
+		List<StatisticsDTO> monthsIncome = new ArrayList<>();
 		
-		for(int month = 1; month <= 12; month++ ){
-			List<OrderUnit> ordersForMonth = orderDAO.getOrdersForMonth(month);
+		for(Month month : Month.values()){
+			List<OrderUnit> ordersForMonth = orderDAO.getOrdersForMonth(month.getValue());
 			Double price = 0.0;
 			for(OrderUnit order : ordersForMonth) {
 				for(Item item : order.getItems()) {
 					price = price + item.getPrice();
 				}
 			}
-			monthsIncome.add(price);
+			StatisticsDTO stat = new StatisticsDTO();
+			stat.setLabel(month.toString());
+			stat.setValue(price);
+			monthsIncome.add(stat);
 		}
-		MonthIncomeDTO monthIncomDTO = new MonthIncomeDTO();
-		monthIncomDTO.setIncome(monthsIncome);
-		return monthIncomDTO;
+
+		return monthsIncome;
 	}
 
 	
