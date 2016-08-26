@@ -1,6 +1,7 @@
 package bg.unisofia.fmi.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 import bg.unisofia.fmi.dao.BillDAO;
@@ -105,5 +107,21 @@ public class BillDAOImpl implements BillDAO {
 		return 0;
 	}
 
-
+	@Override
+	public List<Bill> getAllBillsForLastWeek() {
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -7);
+		Date startDate = cal.getTime();
+		System.out.println("Date = "+ cal.getTime());
+		
+		String txtQuery = "SELECT b FROM Bill b  WHERE b.completedAt BETWEEN :startDate and :endDate";
+		TypedQuery<Bill> getAllBillsQuery = em.createQuery(txtQuery, Bill.class)
+		.setParameter("startDate", startDate, TemporalType.DATE)
+		.setParameter("endDate", new Date(), TemporalType.DATE);
+		
+		return getAllBillsQuery.getResultList();
+		
+	}
+	
 }

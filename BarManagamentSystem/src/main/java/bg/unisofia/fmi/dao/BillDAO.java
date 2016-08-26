@@ -18,6 +18,8 @@ public interface BillDAO {
 	List<OrderUnit> getOrders(int billId);
 
 	OrderUnit addOrder(int billId, OrderUnit order);
+	
+	public List<Bill> getAllBillsForLastWeek();
 
 	List<ItemDTO> getOrderedItems(List<OrderUnit> orders);
 

@@ -1,5 +1,6 @@
 package bg.unisofia.fmi.dao;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import bg.unisofia.fmi.models.User;
 public interface OrderDAO {
 	
 	public List<OrderUnit> getOrdersByDate(Date date);
+	
+	public List<OrderUnit> getOrdersForMonth(Integer month)
+			throws ParseException;
 
 	public void createNewOrder(String name);
 
@@ -20,5 +24,6 @@ public interface OrderDAO {
 	public void completeOrders(String name);
 	
 	public List<OrderUnit> getAllOrders();
+	
 	
 }
