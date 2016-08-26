@@ -13,7 +13,7 @@ public interface BillDAO {
 	
 	Bill startBill(Bill bill, User user);
 	
-	float endBill();
+	void endBill(int billId);
 
 	List<OrderUnit> getOrders(int billId);
 

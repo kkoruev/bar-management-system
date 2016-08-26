@@ -130,5 +130,17 @@ public class UserManager {
 			return null;
 		}
 	}
+	
+	@Path("bills/{billId}/end")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response endBill(@PathParam("billId") int billId) {
+		try {
+			billDAO.endBill(billId);
+			return Response.ok().build();
+		} catch (Exception e) {
+			return Response.serverError().build();
+		}
+	}
 
 }

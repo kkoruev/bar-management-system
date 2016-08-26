@@ -102,9 +102,9 @@ public class BillDAOImpl implements BillDAO {
 	}
 
 	@Override
-	public float endBill() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void endBill(int billId) {
+		Bill bill = em.find(Bill.class, billId);
+		bill.setCompletedAt(new Date());
 	}
 
 	@Override
