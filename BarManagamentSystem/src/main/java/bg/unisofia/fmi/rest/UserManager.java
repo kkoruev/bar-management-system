@@ -56,7 +56,15 @@ public class UserManager {
 		// TODO: fix JSON response
 		return Role.values();
 	}
-
+	
+	@Path("/role")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getRole() {
+		return userContext.getUser().getRole();
+	}
+	
+	
 	@Path("/login")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
