@@ -9,7 +9,8 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
             getStartedBills: getStartedBills,
             startBill: startBill,
             getOrdersForBill: getOrdersForBill,
-            addOrder: addOrder
+            addOrder: addOrder,
+            completeBill: completeBill
         };
 
         return serviceAPI; 
@@ -55,11 +56,10 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
             var config = {headers: { 
                 'Accept': 'application/json',
                 'Content-Type': 'application/json' 
-            }}
+            }};
             return $http.post(AppConstants.BASE_URL + "/user/bills/" + bill.billId + "/orders", data, config)
-            .then((data) => {
-                debugger;
-                return $q.resolve(data);
+            .then((response) => {
+                return $q.resolve(response.data.item);
             })
             .catch((error) => {
                 return $q.reject(error);
@@ -70,13 +70,16 @@ app.factory('WaiterService', ['$http', 'AppConstants', '$q',
             var config = {headers: {"Accept" : "application/json"}};
             return $http.get(AppConstants.BASE_URL + "/user/bills/" + bill.billId + "/orders", config)
             .then((response) => {
-                debugger;
                 var items = response.data.item;
                 return $q.resolve(items);
             })
             .catch((error) => {
                 return $q.reject(error);
             })
+        }
+
+        function completeBill(bill) {
+            return $http.put(AppConstants.BASE_URL + "/user/bills/" + bill.billId + "/complete");
         }
 
 
