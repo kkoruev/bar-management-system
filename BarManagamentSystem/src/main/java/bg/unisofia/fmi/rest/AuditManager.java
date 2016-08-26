@@ -32,26 +32,6 @@ public class AuditManager {
 	@EJB
 	BillDAO billDAO;
 	
-/*	@Path("/income")
-	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Double[] getIncomeFosrMonth(@QueryParam("year") String year) {
-		Double[] monthsIncome = new Double[12];
-		
-		for(int month = 1; month <= 12; month++ ){
-			List<OrderUnit> ordersForMonth = orderDAO.getOrdersForMonth(month);
-			Double price = 0.0;
-			for(OrderUnit order : ordersForMonth) {
-				for(Item item : order.getItems()) {
-					price = price + item.getPrice();
-				}
-			}
-			monthsIncome[month] = price;
-		}
-		
-		return monthsIncome;
-	}*/
-
 	@Path("/income/week")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -109,30 +89,6 @@ public class AuditManager {
 			}
 		}
 		return income;
-	}
-
-	public Integer getCountOfLateOrders(Integer year, Integer monthNumber) {
-		Date month = new Date();
-		int count = 0;
-		List<OrderUnit> ordersForMonth = orderDAO.getOrdersByDate(month);
-		for (OrderUnit order : ordersForMonth) {
-			if (order.getStatus().equals(Status.OVERDUE)) {
-				count++;
-			}
-		}
-		return count;
-	}
-
-	public Integer getBestDayInMonth(Date month) {
-		return 5;	
-	}
-
-	public Item getMostSellingItemForMonth(Date month){
-		return new Item();
-	}
-	
-	public Category getMostSellingCategoryForMonth(Date month){
-		return new Category();
 	}
 	
 }
