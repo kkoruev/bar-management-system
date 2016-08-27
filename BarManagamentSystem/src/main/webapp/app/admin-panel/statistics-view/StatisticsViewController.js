@@ -16,7 +16,7 @@ app.controller("StatisticsViewController", [ '$scope', 'StatisticsViewService',
 	
 	$scope.dataSource = {
 		chart : {
-			caption: 'LAST YEAR PROFIT',
+			caption: 'Bills completed per user',
 			theme: 'ocean'
 		}
 			
