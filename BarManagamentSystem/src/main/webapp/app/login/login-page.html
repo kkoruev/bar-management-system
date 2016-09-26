@@ -1,24 +1,7 @@
-<!-- <div class="container">
-    <div class="form-title">
-        <h2>LOGIN</h2>
-    </div>
-    <form class="form-content">
-        <fieldset class="form-group">
-            <input type="text" class="form-control" id="exampleInputUser1"
-                placeholder="Username">
-        </fieldset>
-        <fieldset class="form-group">
-            <input type="password" class="form-control"
-                id="exampleInputPassword1" placeholder="Password">
-        </fieldset>
-        <button type="submit" class="btn btn-primary col-xs-12">Log
-            in</button>
-         <small class="text-muted">Not a member ?</small>
-    </form>
-</div> -->
-
-
 <div class="page-content">
+	<div class="background slide" ng-repeat="image in sliderImages" ng-show="image.visible">
+		<img ng-src="{{image.src}}" style='height: 100%; width: 100%; object-fit: cover'/>
+	</div>
     <div class="form-container">
         <div class="form-title">
             <h2>User Login</h2>
